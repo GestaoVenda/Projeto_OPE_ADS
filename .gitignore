@@ -2,3 +2,7 @@ mvnw.cmd
 mvnw
 target
 README.md
+settings
+.settings
+.classpath
+.project
