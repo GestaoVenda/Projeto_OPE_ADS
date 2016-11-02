@@ -3,9 +3,9 @@ package br.com.opeads.service;
 import java.util.List;
 
 import br.com.opeads.model.Funcionario;
-import br.com.opeads.service.genericinterface.GenericInterface;
+import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
-public class FuncionarioService implements GenericInterface<Funcionario>{
+public class FuncionarioService implements GenericInterfaceService<Funcionario>{
 
 	/**
 	 * 

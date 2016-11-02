@@ -1,9 +1,9 @@
-package br.com.opeads.service.genericinterface;
+package br.com.opeads.service.genericinterfaceservice;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface GenericInterface <E> extends Serializable{
+public interface GenericInterfaceService <E> extends Serializable{
 
 	List<E> listar();
     

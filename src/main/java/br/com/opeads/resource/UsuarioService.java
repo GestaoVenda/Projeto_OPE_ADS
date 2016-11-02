@@ -1,46 +1,46 @@
-package br.com.opeads.service;
+package br.com.opeads.resource;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.model.Produto;
+import br.com.opeads.model.Usuario;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
 @Service
-public class ProdutoService implements GenericInterfaceService<Produto>{
+public class UsuarioService implements GenericInterfaceService<Usuario> {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8822112407772739159L;
+	private static final long serialVersionUID = 8228376641665206323L;
 
 	@Override
-	public List<Produto> listar() {
+	public List<Usuario> listar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void inserir(Produto e) {
+	public void inserir(Usuario e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void alterar(Produto e) {
+	public void alterar(Usuario e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void remover(Produto e) {
+	public void remover(Usuario e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Produto listarPorId(Produto e) {
+	public Usuario listarPorId(Usuario e) {
 		// TODO Auto-generated method stub
 		return null;
 	}

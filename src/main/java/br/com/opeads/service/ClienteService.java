@@ -2,10 +2,13 @@ package br.com.opeads.service;
 
 import java.util.List;
 
-import br.com.opeads.model.Cliente;
-import br.com.opeads.service.genericinterface.GenericInterface;
+import org.springframework.stereotype.Service;
 
-public class ClienteService implements GenericInterface<Cliente>{
+import br.com.opeads.model.Cliente;
+import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
+
+@Service
+public class ClienteService implements GenericInterfaceService<Cliente>{
 
 	/**
 	 * 
