@@ -1,0 +1,21 @@
+=============================================CHANGE-LOG==========================================
+---------------------------------------------1.0------------------------------------------
+Versão inicial:
+
+Criado os modulos
+-Cliente
+-Login
+---------------------------------------------2.0------------------------------------------
+Como solicitado pelo Luan realizamos as seguintes alterações
+
+Modulo Login removidas as tabelas:
+-PERFIL
+-TELA
+-PERMISSAO
+-PERFIL_TELA
+-PERFIL_TELA_PERMISSAO
+-USUARIO_PERFIL
+
+Segundo o mesmo o controle de acesso será executado utilizando token
+
+Criação da tabela EnderecoUsuario
