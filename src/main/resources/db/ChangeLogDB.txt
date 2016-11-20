@@ -8,6 +8,17 @@ Criado os modulos
 ---------------------------------------------2.0------------------------------------------
 Como solicitado pelo Luan realizamos as seguintes alterações
 
+Modulo Login criação das tabelas:
+-PERFIL
+-TELA
+-PERMISSAO
+-PERFIL_TELA
+-PERFIL_TELA_PERMISSAO
+-USUARIO_PERFIL
+-USUARIO
+
+---------------------------------------------3.0------------------------------------------
+
 Modulo Login removidas as tabelas:
 -PERFIL
 -TELA
@@ -18,4 +29,8 @@ Modulo Login removidas as tabelas:
 
 Segundo o mesmo o controle de acesso será executado utilizando token
 
-Criação da tabela EnderecoUsuario
+Criação da tabela Usuario e EnderecoUsuario
+
+---------------------------------------------4.0------------------------------------------
+
+Alteração do tipo de dado dos id's para BIGINT
