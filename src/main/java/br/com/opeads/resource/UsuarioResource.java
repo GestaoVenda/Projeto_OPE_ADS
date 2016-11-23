@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.opeads.service.UsuarioService;
+
 @RestController
 @RequestMapping(value = "/API/Usuario", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class UsuarioResource {

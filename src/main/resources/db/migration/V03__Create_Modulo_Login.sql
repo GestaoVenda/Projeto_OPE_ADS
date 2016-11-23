@@ -1,28 +1,28 @@
 USE ope;
 
-DROP TABLE PERFIL_TELA_PERMISSAO;
-DROP TABLE PERFIL_TELA;
-DROP TABLE USUARIO_PERFIL;
-DROP TABLE PERFIL;
-DROP TABLE USUARIO;
-DROP TABLE TELA;
-DROP TABLE PERMISSAO;
+DROP TABLE perfil_tela_permissao;
+DROP TABLE perfil_tela;
+DROP TABLE usuario_perfil;
+DROP TABLE perfil;
+DROP TABLE usuario;
+DROP TABLE tela;
+DROP TABLE permissao;
 
-CREATE TABLE Usuario (
-  idUsuario INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE usuario (
+  id_usuario BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL ,
   banco VARCHAR(50) NOT NULL ,
   conta VARCHAR(10) NOT NULL ,
   agencia VARCHAR(10) NOT NULL ,
   login VARCHAR(50) UNIQUE NOT NULL ,
   senha VARCHAR(50) NOT NULL ,
-  dtCriacao DATETIME DEFAULT CURRENT_TIMESTAMP(),
+  dt_criacao DATETIME DEFAULT CURRENT_TIMESTAMP(),
   email VARCHAR(60) NULL UNIQUE ,
-  PRIMARY KEY(idUsuario)
+  PRIMARY KEY(id_usuario)
 );
 
-CREATE TABLE EnderecoUsuario (
-  idUsuario INTEGER UNSIGNED NOT NULL,
+CREATE TABLE endereco_usuario (
+  id_usuario BIGINT UNSIGNED NOT NULL,
   logradouro VARCHAR(100) NULL,
   numero INTEGER NULL,
   bairro VARCHAR(100) NULL,
@@ -32,9 +32,9 @@ CREATE TABLE EnderecoUsuario (
   complemento VARCHAR(100) NULL,
   tipo VARCHAR(100) NULL,
   principal BIT NULL DEFAULT 0,
-  PRIMARY KEY(idUsuario),
-  FOREIGN KEY(idUsuario)
-    REFERENCES Usuario(idUsuario)
+  PRIMARY KEY(id_usuario),
+  FOREIGN KEY(id_usuario)
+    REFERENCES usuario(id_usuario)
       ON DELETE CASCADE
       ON UPDATE NO ACTION
 );

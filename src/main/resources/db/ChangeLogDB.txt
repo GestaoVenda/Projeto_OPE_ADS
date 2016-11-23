@@ -31,6 +31,3 @@ Segundo o mesmo o controle de acesso será executado utilizando token
 
 Criação da tabela Usuario e EnderecoUsuario
 
----------------------------------------------4.0------------------------------------------
-
-Alteração do tipo de dado dos id's para BIGINT

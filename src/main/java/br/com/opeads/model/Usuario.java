@@ -1,30 +1,75 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "TB_USUARIO")
 public class Usuario implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -6232276199044450530L;
 	
-
+	@JsonInclude(Include.NON_NULL)
+	@Column(name = "id_usuario")
 	@Id
 	@GeneratedValue(strategy  = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false)
 	private String nome;
 	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false)
+	private String banco;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false)
+	private String conta;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false)
+	private String agencia;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false, unique = true)
+	private String login;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false)
+	private String senha;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(name = "dtCriacao", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
+	private LocalDateTime criacao;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(nullable = false, unique = true)
 	private String email;
+	
+	@JsonInclude(Include.NON_NULL)
+	@OneToOne(mappedBy = "usuario")
+	private EnderecoUsuario endereco;
+
+	public EnderecoUsuario getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(EnderecoUsuario endereco) {
+		this.endereco = endereco;
+	}
 
 	public Long getId() {
 		return id;
@@ -48,6 +93,54 @@ public class Usuario implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getBanco() {
+		return banco;
+	}
+
+	public void setBanco(String banco) {
+		this.banco = banco;
+	}
+
+	public String getConta() {
+		return conta;
+	}
+
+	public void setConta(String conta) {
+		this.conta = conta;
+	}
+
+	public String getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(String agencia) {
+		this.agencia = agencia;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public LocalDateTime getCriacao() {
+		return criacao;
+	}
+
+	public void setCriacao(LocalDateTime criacao) {
+		this.criacao = criacao;
 	}
 
 	@Override

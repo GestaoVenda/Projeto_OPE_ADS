@@ -1,4 +1,4 @@
-package br.com.opeads.resource;
+package br.com.opeads.service;
 
 import java.util.List;
 
@@ -10,9 +10,7 @@ import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 @Service
 public class UsuarioService implements GenericInterfaceService<Usuario> {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8228376641665206323L;
 
 	@Override
