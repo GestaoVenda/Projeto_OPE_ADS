@@ -1,5 +1,3 @@
-USE ope;
-
 CREATE TABLE permissao (
   id_permissao BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   tipo VARCHAR(50) NOT NULL UNIQUE ,
