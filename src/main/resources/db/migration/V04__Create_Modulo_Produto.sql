@@ -1,5 +1,4 @@
-
-use ope;
+USE ope;
 create table categoria (
 	id_categoria BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nome_categoria varchar(100) NOT NULL,

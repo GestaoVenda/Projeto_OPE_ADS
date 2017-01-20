@@ -8,4 +8,7 @@ import br.com.opeads.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
+	public Cliente findByCnpj(String cnpj);
+	
+	public Cliente findByCpf(String cnpj);
 }

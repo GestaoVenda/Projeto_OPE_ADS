@@ -2,9 +2,9 @@ package br.com.opeads.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +25,8 @@ public class Endereco implements Serializable{
 	private Long id;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = {CascadeType.REMOVE})
-	@JoinColumn(name = "id_cliente", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
 	private String logradouro;
@@ -160,7 +160,6 @@ public class Endereco implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 

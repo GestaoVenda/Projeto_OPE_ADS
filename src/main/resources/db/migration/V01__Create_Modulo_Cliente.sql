@@ -1,11 +1,17 @@
 USE ope;
 
 CREATE TABLE cliente (
-  id_cliente BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  dt_criacao DATETIME DEFAULT CURRENT_TIMESTAMP(),
-  inativo BIT NOT NULL DEFAULT 0,
+  id_cliente BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  dt_criacao DATETIME NULL,
+  inativo BIT(1) NULL,
+  nome VARCHAR(100) NULL,
+  cpf VARCHAR(11) NULL,
+  razao VARCHAR(100) NULL,
+  cnpj VARCHAR(14) NULL,
+  insc VARCHAR(14) NULL,
   PRIMARY KEY(id_cliente)
 );
+ 
 
 CREATE TABLE contato (
   id_contato BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -39,32 +45,3 @@ CREATE TABLE endereco (
       ON DELETE CASCADE
       ON UPDATE NO ACTION
 );
-
-CREATE TABLE cliente_pf (
-  id_cliente BIGINT UNSIGNED NOT NULL,
-  nome VARCHAR(100) NOT NULL,
-  cpf VARCHAR(11) NOT NULL,
-  PRIMARY KEY(id_cliente),
-  FOREIGN KEY(id_cliente)
-    REFERENCES cliente(id_cliente)
-      ON DELETE CASCADE
-      ON UPDATE NO ACTION
-);
-
-CREATE TABLE cliente_pj (
-  id_cliente BIGINT UNSIGNED NOT NULL,
-  razao VARCHAR(100) NOT NULL,
-  cnpj VARCHAR(14) NOT NULL,
-  insc VARCHAR(14) NOT NULL,
-  PRIMARY KEY(id_cliente),
-  FOREIGN KEY(id_cliente)
-    REFERENCES cliente(id_cliente)
-      ON DELETE CASCADE
-      ON UPDATE NO ACTION
-);
-
-INSERT cliente VALUES ();
-INSERT cliente_pj VALUES (1,'Cliente Teste','22549365000102','952812013738');
-INSERT contato (id_cliente, telefone, celular, email, descricao) VALUES (1,'1139564532','11999999999','teste@teste.com','Teste');
-INSERT endereco (id_cliente, logradouro, numero, bairro, cidade, estado, cep, complemento, tipo, principal)
-    VALUES (1,'Rua Manuel do Teste',333,'Boa Vista','São Paulo','SP','09956020','','Casa',1);

@@ -19,13 +19,12 @@ public class UsuarioService implements GenericInterfaceService<Usuario> {
 		return null;
 	}
 
-	@Override
-	public void inserir(Usuario e) {
+	public Usuario inserir(Usuario e) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-	@Override
+
 	public void alterar(Usuario e) {
 		// TODO Auto-generated method stub
 		
@@ -38,7 +37,7 @@ public class UsuarioService implements GenericInterfaceService<Usuario> {
 	}
 
 	@Override
-	public Usuario listarPorId(Usuario e) {
+	public Usuario buscaPorId(Usuario e) {
 		// TODO Auto-generated method stub
 		return null;
 	}

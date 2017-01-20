@@ -16,34 +16,38 @@ public class ClienteService implements GenericInterfaceService<Cliente>{
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
-
+	
 	@Override
 	public List<Cliente> listar() {
 		return clienteRepository.findAll();
 	}
 
-	@Override
-	public void inserir(Cliente e) {
-		// TODO Auto-generated method stub
+	public Cliente inserir(Cliente cliente) {
+		Cliente verificador = null;
 		
+		if(cliente.getCnpj() != null)verificador = clienteRepository.findByCnpj(cliente.getCnpj());
+		if(cliente.getCpf() != null)verificador = clienteRepository.findByCpf(cliente.getCpf());
+		
+		if(verificador != null)System.out.println("Cliente já existe!");
+		
+		return clienteRepository.save(cliente);
+	}
+
+	public void alterar(Cliente  cliente) {
+		buscaPorId(cliente);
+		clienteRepository.save(cliente);
 	}
 
 	@Override
-	public void alterar(Cliente e) {
-		// TODO Auto-generated method stub
-		
+	public void remover(Cliente  cliente) {
+		clienteRepository.delete(cliente);
 	}
 
 	@Override
-	public void remover(Cliente e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Cliente listarPorId(Cliente e) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cliente buscaPorId(Cliente cliente) {
+		Cliente verificador = clienteRepository.findOne(cliente.getId());
+		if(verificador == null)System.out.println("Cliente não existe");;
+		return clienteRepository.findOne(cliente.getId());
 	}
 
 

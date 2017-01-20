@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -29,21 +28,13 @@ public class Cliente implements Serializable{
 	private Long id;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "dt_criacao", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+	@Column(name = "dt_criacao")
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDateTime criacao;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(nullable = false, columnDefinition = "bit default 0")
+	@Column()
 	private Boolean inativo;
-	
-	@JsonInclude(Include.NON_NULL)
-	@OneToOne(mappedBy = "cliente")
-	private ClientePF clientePF;
-	
-	@JsonInclude(Include.NON_NULL)
-	@OneToOne(mappedBy = "cliente")
-	private ClientePF clientePJ;
 	
 	@JsonInclude(Include.NON_EMPTY)
 	@OneToMany(mappedBy = "cliente")
@@ -53,23 +44,67 @@ public class Cliente implements Serializable{
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> endereco;
 	
+	@JsonInclude(Include.NON_NULL)
+	@Column
+	private String nome;
 	
-	public ClientePF getClientePF() {
-		return clientePF;
-	}
-
-	public void setClientePF(ClientePF clientePF) {
-		this.clientePF = clientePF;
-	}
-
+	@JsonInclude(Include.NON_NULL)
+	@Column
+	private String cpf;
 	
-	public ClientePF getClientePJ() {
-		return clientePJ;
+	@JsonInclude(Include.NON_NULL)
+	@Column
+	private String razao;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column
+	private String cnpj;
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column
+	private String insc;
+
+
+	public String getRazao() {
+		return razao;
 	}
 
-	public void setClientePJ(ClientePF clientePJ) {
-		this.clientePJ = clientePJ;
+	public void setRazao(String razao) {
+		this.razao = razao;
 	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getInsc() {
+		return insc;
+	}
+
+	public void setInsc(String insc) {
+		this.insc = insc;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}	
 	
 	
 	public List<Contato> getContato() {
@@ -111,7 +146,6 @@ public class Cliente implements Serializable{
 	public void setInativo(Boolean inativo) {
 		this.inativo = inativo;
 	}
-
 
 	@Override
 	public int hashCode() {

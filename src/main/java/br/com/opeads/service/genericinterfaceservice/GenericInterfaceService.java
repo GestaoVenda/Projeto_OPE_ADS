@@ -7,12 +7,8 @@ public interface GenericInterfaceService <E> extends Serializable{
 
 	List<E> listar();
     
-    void inserir(E e);
-    
-    void alterar(E e);
-    
     void remover(E e);
     
-    E listarPorId(E e);
+    E buscaPorId(E e);
 	
 }
