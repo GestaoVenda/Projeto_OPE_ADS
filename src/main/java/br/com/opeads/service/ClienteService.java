@@ -40,6 +40,7 @@ public class ClienteService implements GenericInterfaceService<Cliente>{
 
 	@Override
 	public void remover(Cliente  cliente) {
+		buscaPorId(cliente);
 		clienteRepository.delete(cliente);
 	}
 

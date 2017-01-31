@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -19,7 +21,11 @@ public class EnderecoUsuario implements Serializable{
 	 */
 	private static final long serialVersionUID = 7666097250216026835L;
 	
+	@Column(name = "id_endereco")
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@OneToOne(cascade = {CascadeType.REMOVE})
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
@@ -42,6 +48,15 @@ public class EnderecoUsuario implements Serializable{
 	
 	@Column(columnDefinition = "bit default 0")
 	private Boolean principal;
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -127,7 +142,7 @@ public class EnderecoUsuario implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -140,14 +155,12 @@ public class EnderecoUsuario implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		EnderecoUsuario other = (EnderecoUsuario) obj;
-		if (usuario == null) {
-			if (other.usuario != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!usuario.equals(other.usuario))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
-	
 
 }

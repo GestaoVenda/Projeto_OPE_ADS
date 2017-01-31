@@ -1,7 +1,7 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,10 +30,10 @@ public class Cliente implements Serializable{
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "dt_criacao")
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
-	private LocalDateTime criacao;
+	private Date criacao;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column()
+	@Column(columnDefinition = "BIT DEFAULT 0")
 	private Boolean inativo;
 	
 	@JsonInclude(Include.NON_EMPTY)
@@ -131,11 +131,11 @@ public class Cliente implements Serializable{
 		this.id = id;
 	}
 
-	public LocalDateTime getCriacao() {
+	public Date getCriacao() {
 		return criacao;
 	}
 
-	public void setCriacao(LocalDateTime criacao) {
+	public void setCriacao(Date criacao) {
 		this.criacao = criacao;
 	}
 

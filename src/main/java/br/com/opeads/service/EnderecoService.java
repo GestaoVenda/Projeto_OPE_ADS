@@ -45,6 +45,7 @@ public class EnderecoService implements GenericInterfaceService<Endereco>{
 
 	@Override
 	public void remover(Endereco endereco) {
+		buscaPorId(endereco);
 		enderecoRepository.delete(endereco);
 	}
 

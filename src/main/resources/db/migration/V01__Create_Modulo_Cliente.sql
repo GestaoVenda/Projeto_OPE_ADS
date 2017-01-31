@@ -2,8 +2,8 @@ USE ope;
 
 CREATE TABLE cliente (
   id_cliente BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  dt_criacao DATETIME NULL,
-  inativo BIT(1) NULL,
+  dt_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+  inativo BIT DEFAULT 0,
   nome VARCHAR(100) NULL,
   cpf VARCHAR(11) NULL,
   razao VARCHAR(100) NULL,

@@ -22,6 +22,7 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE endereco_usuario (
+  id_endereco BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   id_usuario BIGINT UNSIGNED NOT NULL,
   logradouro VARCHAR(100) NULL,
   numero INTEGER NULL,
@@ -32,7 +33,7 @@ CREATE TABLE endereco_usuario (
   complemento VARCHAR(100) NULL,
   tipo VARCHAR(100) NULL,
   principal BIT NULL DEFAULT 0,
-  PRIMARY KEY(id_usuario),
+  PRIMARY KEY(id_endereco),
   FOREIGN KEY(id_usuario)
     REFERENCES usuario(id_usuario)
       ON DELETE CASCADE

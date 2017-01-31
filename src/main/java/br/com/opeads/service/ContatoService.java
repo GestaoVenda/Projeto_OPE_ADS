@@ -45,6 +45,7 @@ public class ContatoService implements GenericInterfaceService<Contato>{
 
 	@Override
 	public void remover(Contato contato) {
+		buscaPorId(contato);
 		contatoRepository.delete(contato);		
 	}
 

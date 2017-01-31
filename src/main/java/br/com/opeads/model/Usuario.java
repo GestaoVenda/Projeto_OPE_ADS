@@ -1,7 +1,7 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -51,9 +55,11 @@ public class Usuario implements Serializable {
 	private String senha;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "dtCriacao", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+	@Column(name = "dt_criacao", columnDefinition = "datetime default CURRENT_TIMESTAMP")
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
-	private LocalDateTime criacao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
+	@Temporal(TemporalType.DATE)
+	private Date criacao;
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(nullable = false, unique = true)
@@ -135,11 +141,11 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public LocalDateTime getCriacao() {
+	public Date getCriacao() {
 		return criacao;
 	}
 
-	public void setCriacao(LocalDateTime criacao) {
+	public void setCriacao(Date criacao) {
 		this.criacao = criacao;
 	}
 
