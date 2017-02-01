@@ -9,10 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -55,10 +51,8 @@ public class Usuario implements Serializable {
 	private String senha;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "dt_criacao", columnDefinition = "datetime default CURRENT_TIMESTAMP")
+	@Column(name = "dt_criacao")
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
-	@Temporal(TemporalType.DATE)
 	private Date criacao;
 	
 	@JsonInclude(Include.NON_NULL)

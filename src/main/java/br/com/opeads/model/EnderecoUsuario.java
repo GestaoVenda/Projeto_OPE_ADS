@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "endereco_usuario")
 public class EnderecoUsuario implements Serializable{
@@ -26,6 +28,7 @@ public class EnderecoUsuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonIgnore
 	@OneToOne(cascade = {CascadeType.REMOVE})
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;

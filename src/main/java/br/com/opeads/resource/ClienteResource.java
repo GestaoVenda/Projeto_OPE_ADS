@@ -45,7 +45,7 @@ public class ClienteResource {
 	@RequestMapping(value = "/delete/cliente",method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> deletar(@RequestBody Cliente cliente){
 		clienteService.remover(cliente);
-		return ResponseEntity.noContent().build() ;
+		return ResponseEntity.noContent().build();
 	}
 
 }

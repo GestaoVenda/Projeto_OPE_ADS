@@ -43,7 +43,7 @@ public class ContatoResource {
 		return ResponseEntity.accepted().build() ;
 	}
 	
-	@RequestMapping(value = "cliente/{id}/delete/contato",method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value = "/cliente/{id}/delete/contato",method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> deletar(@RequestBody Contato contato){
 		contatoService.remover(contato);
 		return ResponseEntity.noContent().build() ;

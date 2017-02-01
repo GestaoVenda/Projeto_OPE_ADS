@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Produto implements Serializable{
 
@@ -29,10 +32,12 @@ public class Produto implements Serializable{
 	
 	private String descricao;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_medida")
 	private Medida medida;
@@ -57,6 +62,7 @@ public class Produto implements Serializable{
 	@Column(name = "item_fracionado")
 	private Boolean itemFracionado;
 	
+	@JsonFormat(pattern = "dd/MM/yyy")
 	private Date validade;
 	
 	private Boolean ativo;
