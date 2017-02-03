@@ -8,4 +8,5 @@ import br.com.opeads.model.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 
+	public Categoria findBynomeCategoria(String nomeCategoria);
 }

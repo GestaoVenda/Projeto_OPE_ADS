@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.EnderecoJaExisteException;
+import br.com.opeads.Exception.EnderecoNaoExisteException;
 import br.com.opeads.model.EnderecoUsuario;
 import br.com.opeads.model.Usuario;
 import br.com.opeads.repository.EnderecoUsuarioRepository;
-import br.com.opeads.repository.UsuarioRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
 @Service
@@ -23,7 +24,7 @@ public class EnderecoUsuarioService implements GenericInterfaceService<EnderecoU
 	private EnderecoUsuarioRepository enderecoUsuarioRepository;
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioService usuarioService;
 
 	@Override
 	public List<EnderecoUsuario> listar() {
@@ -31,7 +32,12 @@ public class EnderecoUsuarioService implements GenericInterfaceService<EnderecoU
 	}
 	
 	public EnderecoUsuario inserir(Long id, EnderecoUsuario enderecoUsuario) {
-		Usuario usuario = usuarioRepository.findOne(id);
+		Usuario usuario = new Usuario();
+		EnderecoUsuario verificador = null;
+		usuario.setId(id);
+		usuario = usuarioService.buscaPorId(usuario);
+		if(enderecoUsuario.getId() != null)verificador = enderecoUsuarioRepository.findOne(enderecoUsuario.getId());
+		if(verificador != null)throw new EnderecoJaExisteException("O endereço informado já existe");
 		enderecoUsuario.setUsuario(usuario);
 		return enderecoUsuarioRepository.save(enderecoUsuario);
 	}
@@ -45,13 +51,14 @@ public class EnderecoUsuarioService implements GenericInterfaceService<EnderecoU
 	@Override
 	public EnderecoUsuario buscaPorId(EnderecoUsuario enderecoUsuario) {
 		EnderecoUsuario verificador = enderecoUsuarioRepository.findOne(enderecoUsuario.getId());
-		if(verificador == null)System.out.println("Endereço não existe");;
+		if(verificador == null)throw new EnderecoNaoExisteException("O endereço informado não existe");
 		return enderecoUsuarioRepository.findOne(enderecoUsuario.getId());
 	}
 	
 	public void alterar(Long id, EnderecoUsuario enderecoUsuario) {
+		Usuario usuario = new Usuario();
 		buscaPorId(enderecoUsuario);
-		Usuario usuario = usuarioRepository.findOne(id);
+		usuario = usuarioService.buscaPorId(usuario);
 		enderecoUsuario.setUsuario(usuario);
 		enderecoUsuarioRepository.save(enderecoUsuario);
 	}

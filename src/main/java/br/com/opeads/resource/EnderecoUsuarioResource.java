@@ -31,7 +31,7 @@ public class EnderecoUsuarioResource {
 	}
 	
 	@RequestMapping(value = "/usuario/{id}/save/endereco",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Void> inserir(@PathVariable("id") Long id,@RequestBody EnderecoUsuario endereco){
+	public ResponseEntity<Void> inserir(@PathVariable("id") Long id, @RequestBody EnderecoUsuario endereco){
 		endereco = enderecoUsuarioService.inserir(id, endereco);
 		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/usuario/"+endereco.getUsuario().getId()+"/find/endereco/"+endereco.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;

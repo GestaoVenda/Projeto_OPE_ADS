@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.ProdutoJaExisteException;
+import br.com.opeads.Exception.ProdutoNaoExisteException;
 import br.com.opeads.model.Produto;
 import br.com.opeads.repository.ProdutoRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -22,11 +24,8 @@ public class ProdutoService implements GenericInterfaceService<Produto> {
 	
 	public Produto inserir(Produto produto) {
 		Produto verificador = null;
-		
 		if(produto.getId() != null)verificador = produtoRepository.findOne(produto.getId());
-		
-		if(verificador != null)System.out.println("Produto já existe!");
-		
+		if(verificador != null)throw new ProdutoJaExisteException("O produto informado já existe");
 		return produtoRepository.save(produto);
 	}
 	
@@ -44,7 +43,7 @@ public class ProdutoService implements GenericInterfaceService<Produto> {
 	@Override
 	public Produto buscaPorId(Produto produto) {
 		Produto verificador = produtoRepository.findOne(produto.getId());
-		if(verificador == null)System.out.println("Produto não existe");;
+		if(verificador == null)throw new ProdutoNaoExisteException("O produto informado não existe");
 		return produtoRepository.findOne(produto.getId());
 	}
 	

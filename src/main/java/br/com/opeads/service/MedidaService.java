@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.MedidaJaExisteException;
+import br.com.opeads.Exception.MedidaNaoExisteException;
 import br.com.opeads.model.Medida;
 import br.com.opeads.repository.MedidaRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -22,11 +24,9 @@ public class MedidaService implements GenericInterfaceService<Medida>{
 	
 	public Medida inserir(Medida medida) {
 		Medida verificador = null;
-		
+		if(!medida.getNomeMedida().isEmpty())verificador = medidaRepository.findByNomeMedida(medida.getNomeMedida());
 		if(medida.getId() != null)verificador = medidaRepository.findOne(medida.getId());
-		
-		if(verificador != null)System.out.println("Medida já existe!");
-		
+		if(verificador != null)throw new MedidaJaExisteException("A medida informada já existe");
 		return medidaRepository.save(medida);
 	}
 
@@ -44,7 +44,7 @@ public class MedidaService implements GenericInterfaceService<Medida>{
 	@Override
 	public Medida buscaPorId(Medida medida) {
 		Medida verificador = medidaRepository.findOne(medida.getId());
-		if(verificador == null)System.out.println("Medida não existe");;
+		if(verificador == null)throw new MedidaNaoExisteException("A medida informada não existe");
 		return medidaRepository.findOne(medida.getId());
 	}
 	

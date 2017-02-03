@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.CategoriaJaExisteException;
+import br.com.opeads.Exception.CategoriaNaoExisteException;
 import br.com.opeads.model.Categoria;
 import br.com.opeads.repository.CategoriaRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -22,11 +24,9 @@ public class CategoriaService implements GenericInterfaceService<Categoria>{
 	
 	public Categoria inserir(Categoria categoria) {
 		Categoria verificador = null;
-		
+		if(!categoria.getNomeCategoria().isEmpty())verificador = categoriaRepository.findBynomeCategoria(categoria.getNomeCategoria());
 		if(categoria.getId() != null)verificador = categoriaRepository.findOne(categoria.getId());
-		
-		if(verificador != null)System.out.println("Categoria já existe!");
-		
+		if(verificador != null)throw new CategoriaJaExisteException("A categoria informada já existe");
 		return categoriaRepository.save(categoria);
 	}
 
@@ -44,8 +44,8 @@ public class CategoriaService implements GenericInterfaceService<Categoria>{
 	@Override
 	public Categoria buscaPorId(Categoria categoria) {
 		Categoria verificador = categoriaRepository.findOne(categoria.getId());
-		if(verificador == null)System.out.println("Categoria não existe");;
-		return categoriaRepository.findOne(categoria.getId());
+		if(verificador == null)throw new CategoriaNaoExisteException("A categoria informada não existe");;
+		return verificador;
 	}
 	
 	public void alterar(Categoria  categoria) {

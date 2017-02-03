@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.ClienteNaoExisteException;
+import br.com.opeads.Exception.ContatoJaExisteException;
 import br.com.opeads.model.Cliente;
 import br.com.opeads.model.Contato;
-import br.com.opeads.repository.ClienteRepository;
 import br.com.opeads.repository.ContatoRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
@@ -23,7 +24,7 @@ public class ContatoService implements GenericInterfaceService<Contato>{
 	private ContatoRepository contatoRepository;
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 	
 	@Override
 	public List<Contato> listar() {
@@ -31,16 +32,23 @@ public class ContatoService implements GenericInterfaceService<Contato>{
 	}
 
 	public Contato inserir(Long id, Contato contato) {
-		Cliente cliente = clienteRepository.findOne(id);
+		Cliente cliente = new Cliente();
+		Contato verificador = null;
+		cliente.setId(id);
+		cliente = clienteService.buscaPorId(cliente);
+		if(contato.getId() != null)verificador = contatoRepository.findOne(contato.getId());
+		if(verificador != null)throw new ContatoJaExisteException("O contato informado já existe");
 		contato.setCliente(cliente);
 		return contatoRepository.save(contato);
 	}
 
 	public void alterar(Long id,Contato contato) {
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		cliente = clienteService.buscaPorId(cliente);
 		buscaPorId(contato);
-		Cliente cliente = clienteRepository.findOne(id);
 		contato.setCliente(cliente);
-		contatoRepository.save(contato);		
+		contatoRepository.save(contato);	
 	}
 
 	@Override
@@ -51,7 +59,9 @@ public class ContatoService implements GenericInterfaceService<Contato>{
 
 	@Override
 	public Contato buscaPorId(Contato contato) {
-		return contatoRepository.findOne(contato.getId());
+		Contato verificador = contatoRepository.findOne(contato.getId());
+		if(verificador == null)throw new ClienteNaoExisteException("O contato informado não existe");
+		return verificador;
 	}
 
 }

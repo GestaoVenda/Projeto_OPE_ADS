@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.ClienteJaExisteException;
+import br.com.opeads.Exception.ClienteNaoExisteException;
 import br.com.opeads.model.Cliente;
 import br.com.opeads.repository.ClienteRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -24,12 +26,10 @@ public class ClienteService implements GenericInterfaceService<Cliente>{
 
 	public Cliente inserir(Cliente cliente) {
 		Cliente verificador = null;
-		
+		if(cliente.getId() != null)verificador = clienteRepository.findOne(cliente.getId());
 		if(cliente.getCnpj() != null)verificador = clienteRepository.findByCnpj(cliente.getCnpj());
 		if(cliente.getCpf() != null)verificador = clienteRepository.findByCpf(cliente.getCpf());
-		
-		if(verificador != null)System.out.println("Cliente já existe!");
-		
+		if(verificador != null)throw new ClienteJaExisteException("O cliente informado já existe");
 		return clienteRepository.save(cliente);
 	}
 
@@ -47,8 +47,8 @@ public class ClienteService implements GenericInterfaceService<Cliente>{
 	@Override
 	public Cliente buscaPorId(Cliente cliente) {
 		Cliente verificador = clienteRepository.findOne(cliente.getId());
-		if(verificador == null)System.out.println("Cliente não existe");;
-		return clienteRepository.findOne(cliente.getId());
+		if(verificador == null)throw new ClienteNaoExisteException("O cliente informado não existe");
+		return verificador;
 	}
 
 

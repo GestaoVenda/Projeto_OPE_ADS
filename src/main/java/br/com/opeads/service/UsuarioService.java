@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.opeads.Exception.UsuarioJaExisteException;
+import br.com.opeads.Exception.UsuarioNaoExisteException;
 import br.com.opeads.model.Usuario;
 import br.com.opeads.repository.UsuarioRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -27,11 +29,10 @@ public class UsuarioService implements GenericInterfaceService<Usuario> {
 
 	public Usuario inserir(Usuario usuario) {
 		Usuario verificador = null;
-		
+		if(!usuario.getLogin().isEmpty())verificador = usuarioRepository.findByLogin(usuario.getLogin());
+		if(!usuario.getLogin().isEmpty())verificador = usuarioRepository.findByEmail(usuario.getEmail());
 		if(usuario.getId() != null)verificador = usuarioRepository.findOne(usuario.getId());
-		
-		if(verificador != null)System.out.println("Usuario já existe!");
-		
+		if(verificador != null)throw new UsuarioJaExisteException("O usuário informado já existe");
 		return usuarioRepository.save(usuario);
 	}
 
@@ -49,8 +50,9 @@ public class UsuarioService implements GenericInterfaceService<Usuario> {
 
 	@Override
 	public Usuario buscaPorId(Usuario usuario) {
-		Usuario verificador = usuarioRepository.findOne(usuario.getId());
-		if(verificador == null)System.out.println("Usuario não existe");;
+		Usuario verificador = null;
+		verificador = usuarioRepository.findOne(usuario.getId());
+		if(verificador == null)throw new UsuarioNaoExisteException("O usuário informado não existe");
 		return usuarioRepository.findOne(usuario.getId());
 	}
 
