@@ -2,6 +2,8 @@ package br.com.opeads.service;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,16 @@ public class UsuarioService implements GenericInterfaceService<Usuario> {
 		Usuario verificador = usuarioRepository.findOne(usuario.getId());
 		if(verificador == null)System.out.println("Usuario não existe");;
 		return usuarioRepository.findOne(usuario.getId());
+	}
+
+	public Usuario autenticar(Usuario usuario) throws ServletException{
+		Usuario consulta = usuarioRepository.findByLogin(usuario.getLogin());
+		if(consulta != null){
+			if(usuario.getSenha().equals(consulta.getSenha())){
+				return consulta;
+			}
+		}
+		throw new ServletException("Usuário e/ou senha inválidos!");
 	}
 
 }

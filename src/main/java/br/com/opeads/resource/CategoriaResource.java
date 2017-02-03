@@ -45,6 +45,6 @@ public class CategoriaResource {
 	@RequestMapping(value = "/delete/categoria", method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> deletar(@RequestBody Categoria categoria){
 		categoriaService.remover(categoria);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 }

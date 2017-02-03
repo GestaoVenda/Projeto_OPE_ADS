@@ -45,6 +45,6 @@ public class ProdutoResource {
 	@RequestMapping(value = "/delete/produto", method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> deletar(@RequestBody Produto produto){
 		produtoService.remover(produto);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 }

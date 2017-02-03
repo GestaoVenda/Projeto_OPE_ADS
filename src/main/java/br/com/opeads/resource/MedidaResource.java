@@ -45,6 +45,6 @@ public class MedidaResource {
 	@RequestMapping(value = "/delete/medida", method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> deletar(@RequestBody Medida medida){
 		medidaService.remover(medida);
-		return ResponseEntity.accepted().build();
+		return ResponseEntity.noContent().build();
 	}
 }

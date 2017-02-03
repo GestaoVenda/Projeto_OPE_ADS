@@ -31,11 +31,11 @@ create table produto (
     FOREIGN KEY(id_categoria)
 		REFERENCES categoria(id_categoria)
 		ON DELETE CASCADE
-      	ON UPDATE NO ACTION,
+		ON UPDATE NO ACTION,
 	FOREIGN KEY(id_medida)
 		REFERENCES medida(id_medida)
 		ON DELETE CASCADE
-      	ON UPDATE NO ACTION
+		ON UPDATE NO ACTION
 );
 
 create table item_fracao (
