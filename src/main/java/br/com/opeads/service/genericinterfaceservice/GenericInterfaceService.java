@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface GenericInterfaceService <E> extends Serializable{
 
-	List<E> listar();
+	List<E> read();
     
-    void remover(E e);
+    void delete(E e);
     
-    E buscaPorId(E e);
+    E findById(E e);
 	
 }
