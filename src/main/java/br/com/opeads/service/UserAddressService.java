@@ -35,7 +35,7 @@ public class UserAddressService implements GenericInterfaceService<UserAddress> 
 		User user = new User();
 		UserAddress check = null;
 		user.setId(id);
-		user = userService.buscaPorId(user);
+		user = userService.findById(user);
 		if(userAddress.getId() != null)check = userAddressRepository.findOne(userAddress.getId());
 		if(check != null)throw new AddressAlreadyExistsException("O endereço informado já existe");
 		userAddress.setUser(user);
@@ -58,7 +58,7 @@ public class UserAddressService implements GenericInterfaceService<UserAddress> 
 	public void update(Long id, UserAddress userAddress) {
 		User user = new User();
 		findById(userAddress);
-		user = userService.buscaPorId(user);
+		user = userService.findById(user);
 		userAddress.setUser(user);
 		userAddressRepository.save(userAddress);
 	}

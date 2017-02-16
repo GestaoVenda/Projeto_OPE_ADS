@@ -35,7 +35,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 		Client client = new Client();
 		Contact check = null;
 		client.setId(id);
-		client = clientService.buscaPorId(client);
+		client = clientService.findById(client);
 		if(contact.getId() != null)check = contactRepository.findOne(contact.getId());
 		if(check != null)throw new ContactAlreadyExistsException("O contato informado já existe");
 		contact.setClient(client);
@@ -45,7 +45,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	public void update(Long id,Contact contact) {
 		Client client = new Client();
 		client.setId(id);
-		client = clientService.buscaPorId(client);
+		client = clientService.findById(client);
 		findById(contact);
 		contact.setClient(client);
 		contactRepository.save(contact);	

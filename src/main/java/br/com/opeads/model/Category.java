@@ -28,6 +28,7 @@ public class Category implements Serializable{
 	@Column(name = "nome_categoria")
 	private String categoryName;
 	
+	@Column(name = "ativo")
 	private Boolean active;
 	
 	@OneToMany(mappedBy = "category")

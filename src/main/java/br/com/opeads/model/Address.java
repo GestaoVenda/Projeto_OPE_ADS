@@ -40,6 +40,24 @@ public class Address implements Serializable{
 	@Column(name = "bairro")
 	private String neighborhood;
 
+	@Column(name = "cidade")
+	private String city;
+	
+	@Column(name = "estado")
+	private String district;
+	
+	@Column(name = "cep")
+	private String cep;
+	
+	@Column(name = "complemento")
+	private String complement;
+	
+	@Column(name = "tipo")
+	private String type;
+	
+	@Column(name = "principal", columnDefinition = "bit default 0")
+	private Boolean main;
+	
 	public Long getId() {
 		return id;
 	}
@@ -127,26 +145,6 @@ public class Address implements Serializable{
 	public void setMain(Boolean main) {
 		this.main = main;
 	}
-
-	@Column(name = "cidade")
-	private String city;
-	
-	@Column(name = "estado")
-	private String district;
-	
-	@Column(name = "cep")
-	private String cep;
-	
-	@Column(name = "complemento")
-	private String complement;
-	
-	@Column(name = "tipo")
-	private String type;
-	
-	@Column(name = "principal", columnDefinition = "bit default 0")
-	private Boolean main;
-	
-	
 
 	@Override
 	public int hashCode() {
