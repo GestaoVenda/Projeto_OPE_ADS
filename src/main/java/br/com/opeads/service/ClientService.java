@@ -53,6 +53,12 @@ public class ClientService implements GenericInterfaceService<Client>{
 	public void update(Client  client) {
 		findById(client);
 		clientRepository.save(client);
+		for(Contact contact: client.getContacts()){
+			contactService.update(client.getId(), contact);
+		}
+		for(Address address: client.getAddresses()){
+			addressService.update(client.getId(), address);
+		}
 	}
 
 	@Override

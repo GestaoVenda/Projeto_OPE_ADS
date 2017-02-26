@@ -59,8 +59,12 @@ public class EmailService implements GenericInterfaceService<Email>{
 		return emailRepository.findOne(email.getId());
 	}
 	
-	public void update(Email  measure) {
-		findById(measure);
-		emailRepository.save(measure);
+	public void update(Long id, Email email) {
+		contact = new Contact();
+		contact.setId(id);
+		contact = contactService.findById(contact);
+		findById(email);
+		email.setContact(contact);
+		emailRepository.save(email);
 	}
 }

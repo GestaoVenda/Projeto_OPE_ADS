@@ -25,6 +25,8 @@ public class AddressService implements GenericInterfaceService<Address>{
 	
 	@Autowired
 	private ClientService clientService;
+	
+	private Client client;
 
 	@Override
 	public List<Address> read() {
@@ -32,7 +34,7 @@ public class AddressService implements GenericInterfaceService<Address>{
 	}
 
 	public Address create(Long id,Address address) {
-		Client client = new Client();
+		client = new Client();
 		Address check = null;
 		client.setId(id);
 		client = clientService.findById(client);
@@ -43,7 +45,7 @@ public class AddressService implements GenericInterfaceService<Address>{
 	}
 
 	public void update(Long id,Address address) {
-		Client client = new Client();
+		client = new Client();
 		client.setId(id);
 		client = clientService.findById(client);
 		findById(address);

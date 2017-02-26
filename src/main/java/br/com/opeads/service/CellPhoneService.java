@@ -35,6 +35,15 @@ private static final long serialVersionUID = 4682415633538544201L;
 		cellPhone.setContact(contact);
 		return cellPhoneRepository.save(cellPhone);
 	}
+	
+	public void update(Long id, CellPhone phone) {
+		contact = new Contact();
+		contact.setId(id);
+		contact = contactService.findById(contact);
+		findById(phone);
+		phone.setContact(contact);
+		cellPhoneRepository.save(phone);
+	}
 
 	@Override
 	public List<CellPhone> read() {

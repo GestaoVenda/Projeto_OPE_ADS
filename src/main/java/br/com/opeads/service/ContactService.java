@@ -69,12 +69,21 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	}
 
 	public void update(Long id,Contact contact) {
-		Client client = new Client();
+		client = new Client();
 		client.setId(id);
 		client = clientService.findById(client);
 		findById(contact);
 		contact.setClient(client);
 		contactRepository.save(contact);	
+		for(Phone phone: contact.getPhones()){
+			phoneService.update(contact.getId(), phone);
+		}
+		for(CellPhone cellPhone: contact.getCellPhones()){
+			cellphoneService.update(contact.getId(), cellPhone);
+		}
+		for(Email email: contact.getEmails()){
+			emailService.update(contact.getId(),email);
+		}		
 	}
 
 	@Override
