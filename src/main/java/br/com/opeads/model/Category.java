@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "category")
 public class Category implements Serializable{
 
 	/**
@@ -20,19 +20,18 @@ public class Category implements Serializable{
 	 */
 	private static final long serialVersionUID = -2212985440583481675L;
 	
-	@Column(name = "id_categoria")
+	@Column(name = "id_category")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "nome_categoria")
+	@Column(name = "name_category")
 	private String categoryName;
 	
-	@Column(name = "ativo")
+	@Column(name = "active")
 	private Boolean active;
 	
 	@OneToMany(mappedBy = "category")
-	@Column(name = "id_produto")
 	private List<Product> product;
 
 	public Long getId() {

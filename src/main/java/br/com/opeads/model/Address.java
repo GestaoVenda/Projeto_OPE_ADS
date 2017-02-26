@@ -15,47 +15,47 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "endereco")
+@Table(name = "address")
 public class Address implements Serializable{
 
 	
 	private static final long serialVersionUID = 5438990214598641065L;
 	
-	@Column(name = "id_endereco")
+	@Column(name = "id_address")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cliente")
+	@JoinColumn(name = "id_client")
 	private Client client;
 	
-	@Column(name = "logradouro")
+	@Column(name = "street")
 	private String street;
 	
-	@Column(name = "numero")
+	@Column(name = "number")
 	private Integer number;
 	
-	@Column(name = "bairro")
+	@Column(name = "neighborhood")
 	private String neighborhood;
 
-	@Column(name = "cidade")
+	@Column(name = "city")
 	private String city;
 	
-	@Column(name = "estado")
+	@Column(name = "district")
 	private String district;
 	
-	@Column(name = "cep")
-	private String cep;
+	@Column(name = "zipcode")
+	private String zipCode;
 	
-	@Column(name = "complemento")
+	@Column(name = "complement")
 	private String complement;
 	
-	@Column(name = "tipo")
+	@Column(name = "type")
 	private String type;
 	
-	@Column(name = "principal", columnDefinition = "bit default 0")
+	@Column(name = "main", columnDefinition = "bit default 0")
 	private Boolean main;
 	
 	public Long getId() {
@@ -114,12 +114,12 @@ public class Address implements Serializable{
 		this.district = district;
 	}
 
-	public String getCep() {
-		return cep;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public String getComplement() {

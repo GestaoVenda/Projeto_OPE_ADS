@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.opeads.Exception.UserAlreadyExistsException;
-import br.com.opeads.Exception.UserDoesNotExistsException;
 import br.com.opeads.error.model.Error;
+import br.com.opeads.exception.UserAlreadyExistsException;
+import br.com.opeads.exception.UserDoesNotExistsException;
 
 @ControllerAdvice
 public class UserExceptionHandler {

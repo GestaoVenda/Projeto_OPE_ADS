@@ -48,5 +48,10 @@ public class AddressResource{
 		addressService.delete(address);
 		return ResponseEntity.noContent().build() ;
 	}
+	
+	@RequestMapping(value = "/cliente/get/endereco/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Address> get(@PathVariable("id") Address address){
+		return ResponseEntity.ok().body(addressService.findById(address));
+	}
 
 }

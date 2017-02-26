@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,4 +49,8 @@ public class ClientResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(value = "/get/cliente/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Client> getById(@PathVariable("id") Client client){
+		return ResponseEntity.ok().body(clientService.findById(client));
+	}
 }

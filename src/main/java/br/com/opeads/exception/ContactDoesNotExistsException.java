@@ -1,4 +1,4 @@
-package br.com.opeads.Exception;
+package br.com.opeads.exception;
 
 public class ContactDoesNotExistsException extends RuntimeException {
 

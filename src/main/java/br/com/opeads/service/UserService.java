@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.Exception.UserAlreadyExistsException;
-import br.com.opeads.Exception.UserDoesNotExistsException;
+import br.com.opeads.exception.UserAlreadyExistsException;
+import br.com.opeads.exception.UserDoesNotExistsException;
 import br.com.opeads.model.User;
 import br.com.opeads.repository.UserRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;

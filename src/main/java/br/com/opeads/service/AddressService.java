@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.Exception.ClientDoesNotExistsException;
-import br.com.opeads.Exception.AddressAlreadyExistsException;
 import br.com.opeads.model.Client;
+import br.com.opeads.exception.AddressAlreadyExistsException;
+import br.com.opeads.exception.ClientDoesNotExistsException;
 import br.com.opeads.model.Address;
 import br.com.opeads.repository.AddressRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;

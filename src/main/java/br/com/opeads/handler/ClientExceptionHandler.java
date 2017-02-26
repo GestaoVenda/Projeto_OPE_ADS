@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.opeads.Exception.ClientAlreadyExistsException;
-import br.com.opeads.Exception.ClientDoesNotExistsException;
 import br.com.opeads.error.model.Error;
+import br.com.opeads.exception.ClientAlreadyExistsException;
+import br.com.opeads.exception.ClientDoesNotExistsException;
 
 @ControllerAdvice
 public class ClientExceptionHandler {

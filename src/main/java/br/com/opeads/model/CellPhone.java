@@ -1,37 +1,40 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "measure")
-public class Measure implements Serializable{
+@Table(name = "cellphone_contact")
+public class CellPhone implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5513366250017605150L;
-	
-	@Column(name = "id_measure")
+	private static final long serialVersionUID = 3953449955561257738L;
+
+	@Column(name = "id_cellphone")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name_measure")
-	private String measureName;
+	@ManyToOne
+	@JoinColumn(name = "id_contact")
+	private Contact contact;
 	
-	@OneToMany(mappedBy = "measure")
-	private List<Product> product;
+	private String ddi;
+	
+	private String ddd;
+	
+	private String cellphone;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -40,20 +43,36 @@ public class Measure implements Serializable{
 		this.id = id;
 	}
 
-	public String getMeasureName() {
-		return measureName;
+	public Contact getContact() {
+		return contact;
 	}
 
-	public void setMeasureName(String measureName) {
-		this.measureName = measureName;
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 
-	public List<Product> getProduct() {
-		return product;
+	public String getDdi() {
+		return ddi;
 	}
 
-	public void setProduct(List<Product> product) {
-		this.product = product;
+	public void setDdi(String ddi) {
+		this.ddi = ddi;
+	}
+
+	public String getDdd() {
+		return ddd;
+	}
+
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
 
 	@Override
@@ -72,7 +91,7 @@ public class Measure implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Measure other = (Measure) obj;
+		CellPhone other = (CellPhone) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -81,5 +100,8 @@ public class Measure implements Serializable{
 		return true;
 	}
 	
-
+	
+	
 }
+	
+	

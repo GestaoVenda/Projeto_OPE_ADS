@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.Exception.ProductAlreadyExistsException;
-import br.com.opeads.Exception.ProductDoesNotExistsException;
+import br.com.opeads.exception.ProductAlreadyExistsException;
+import br.com.opeads.exception.ProductDoesNotExistsException;
 import br.com.opeads.model.Product;
 import br.com.opeads.repository.ProductRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;

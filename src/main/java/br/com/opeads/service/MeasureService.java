@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.Exception.MeasureAlreadyExistsException;
-import br.com.opeads.Exception.MeasureDoesNotExistsException;
+import br.com.opeads.exception.MeasureAlreadyExistsException;
+import br.com.opeads.exception.MeasureDoesNotExistsException;
 import br.com.opeads.model.Measure;
 import br.com.opeads.repository.MeasureRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;

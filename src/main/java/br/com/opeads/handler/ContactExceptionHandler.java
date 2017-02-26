@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.opeads.Exception.ContactAlreadyExistsException;
-import br.com.opeads.Exception.ContactDoesNotExistsException;
 import br.com.opeads.error.model.Error;
+import br.com.opeads.exception.ContactAlreadyExistsException;
+import br.com.opeads.exception.ContactDoesNotExistsException;
 
 @ControllerAdvice
 public class ContactExceptionHandler {

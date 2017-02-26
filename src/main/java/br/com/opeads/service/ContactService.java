@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.Exception.ClientDoesNotExistsException;
-import br.com.opeads.Exception.ContactAlreadyExistsException;
+import br.com.opeads.exception.ClientDoesNotExistsException;
+import br.com.opeads.exception.ContactAlreadyExistsException;
 import br.com.opeads.model.Client;
 import br.com.opeads.model.Contact;
 import br.com.opeads.repository.ContactRepository;

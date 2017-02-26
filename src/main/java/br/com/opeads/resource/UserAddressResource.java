@@ -48,4 +48,9 @@ public class UserAddressResource {
 		userAddressService.delete(userAddress);
 		return ResponseEntity.noContent().build() ;
 	}
+	
+	@RequestMapping(value = "/usuario/get/endereco/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<UserAddress> get(@PathVariable("id") UserAddress userAddress){
+		return ResponseEntity.ok().body(userAddressService.findById(userAddress));
+	}
 }

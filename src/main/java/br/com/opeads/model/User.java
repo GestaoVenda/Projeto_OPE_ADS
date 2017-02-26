@@ -16,32 +16,32 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "user")
 public class User implements Serializable {
 
 	
 	private static final long serialVersionUID = -6232276199044450530L;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "id_usuario")
+	@Column(name = "id_user")
 	@Id
 	@GeneratedValue(strategy  = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "nome",  nullable = false)
+	@Column(name = "name_user",  nullable = false)
 	private String name;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "banco", nullable = false)
+	@Column(name = "bank", nullable = false)
 	private String bank;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "conta", nullable = false)
+	@Column(name = "account", nullable = false)
 	private String account;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "agencia", nullable = false)
+	@Column(name = "agency", nullable = false)
 	private String agency;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -49,11 +49,11 @@ public class User implements Serializable {
 	private String login;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "senha", nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "dt_criacao")
+	@Column(name = "dt_creation")
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private Date creation;
 	

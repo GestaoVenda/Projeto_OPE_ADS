@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,5 +47,10 @@ public class MeasureResource {
 	public ResponseEntity<Void> delete(@RequestBody Measure measure){
 		measureService.delete(measure);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/get/medida/{id}")
+	public ResponseEntity<Measure> get(@PathVariable("id") Measure measure){
+		return ResponseEntity.ok().body(measureService.findById(measure));
 	}
 }

@@ -48,4 +48,9 @@ public class ContactResource {
 		contactService.delete(contact);
 		return ResponseEntity.noContent().build() ;
 	}
+	
+	@RequestMapping(value = "/cliente/get/contato/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Contact> get(@PathVariable("id") Contact contact){
+		return ResponseEntity.ok().body(contactService.findById(contact));
+	}
 }

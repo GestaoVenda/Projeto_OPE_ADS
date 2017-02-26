@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "product")
 public class Product implements Serializable{
 
 	/**
@@ -26,53 +26,53 @@ public class Product implements Serializable{
 	 */
 	private static final long serialVersionUID = 177863478459313471L;
 	
-	@Column(name = "id_produto")
+	@Column(name = "id_product")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "nome")
+	@Column(name = "name_product")
 	private String name;
 	
-	@Column(name = "descricao")
+	@Column(name = "description")
 	private String description;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_categoria")
+	@JoinColumn(name = "id_category")
 	private Category category;
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_medida")
+	@JoinColumn(name = "id_measure")
 	private Measure measure;
 	
-	@Column(name = "preco_custo")
+	@Column(name = "cost_price")
 	private double costPrice;
 	
-	@Column(name = "preco_venda")
+	@Column(name = "sale_price")
 	private double salePrice;
 	
-	@Column(name = "estoque")
+	@Column(name = "stock")
 	private Integer stock;
 	
-	@Column(name = "estoque_min")
+	@Column(name = "min_stock")
 	private Integer minStock;
 	
-	@Column(name = "estoque_max")
+	@Column(name = "max_stock")
 	private Integer maxStock;
 	
-	@Column(name = "permite_fracionamento")
+	@Column(name = "allows_fractionation")
 	private Boolean allowsFractionation;
 	
-	@Column(name = "item_fracionado")
+	@Column(name = "fractionated_item")
 	private Boolean fractionatedItem;
 	
 	@JsonFormat(pattern = "dd/MM/yyy")
-	@Column(name = "validade")
+	@Column(name = "validity")
 	private Date validity;
 	
-	@Column(name = "ativo")
+	@Column(name = "active")
 	private Boolean active;
 	
 

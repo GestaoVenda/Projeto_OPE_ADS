@@ -27,7 +27,7 @@ public class ProjetoOpeAdsApplication {
 	public FilterRegistrationBean filtroJWT(){
 		FilterRegistrationBean frb = new FilterRegistrationBean();
 		frb.setFilter(new AuthFilter());
-		frb.addUrlPatterns("/api/*");
+		frb.addUrlPatterns("/api/list/*","/api/save/*","/api/edit/*","/api/delete/*");
 		return frb;
 	}
 }

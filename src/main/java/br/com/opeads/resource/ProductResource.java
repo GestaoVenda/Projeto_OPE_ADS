@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,5 +47,10 @@ public class ProductResource {
 	public ResponseEntity<Void> delete(@RequestBody Product product){
 		productService.delete(product);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/get/produto")
+	public ResponseEntity<Product> get(@PathVariable("id") Product product){
+		return ResponseEntity.ok().body(productService.findById(product));
 	}
 }

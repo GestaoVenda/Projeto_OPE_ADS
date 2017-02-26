@@ -25,7 +25,7 @@ public class AuthFilter extends GenericFilterBean{
 		String header = request.getHeader("Authorization");
 		
 		if(header == null || !header.startsWith("Bearer ")){
-				throw new ServletException("Token inexistente ou inválido!");
+				throw new ServletException("Não Autorizado");
 		}
 		
 		String token = header.substring(7);
@@ -33,7 +33,7 @@ public class AuthFilter extends GenericFilterBean{
 		try{
 			claim = Jwts.parser().setSigningKey("wansan").parseClaimsJws(token).getBody();
 		}catch(Exception e){
-			((HttpServletResponse)res).sendError(HttpServletResponse.SC_UNAUTHORIZED,"Token Inválido");
+			throw new ServletException("Token inválido!");
 		}
 		
 		HttpServletResponse response = (HttpServletResponse)res;

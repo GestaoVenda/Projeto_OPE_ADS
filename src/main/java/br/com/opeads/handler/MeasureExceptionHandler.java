@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.opeads.Exception.MeasureAlreadyExistsException;
-import br.com.opeads.Exception.MeasureDoesNotExistsException;
 import br.com.opeads.error.model.Error;
+import br.com.opeads.exception.MeasureAlreadyExistsException;
+import br.com.opeads.exception.MeasureDoesNotExistsException;
 
 @ControllerAdvice
 public class MeasureExceptionHandler {

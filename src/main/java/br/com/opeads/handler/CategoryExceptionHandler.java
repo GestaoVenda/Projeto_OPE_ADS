@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.opeads.Exception.CategoryAlreadyExistsException;
-import br.com.opeads.Exception.CategoryDoesNotExistsException;
 import br.com.opeads.error.model.Error;
+import br.com.opeads.exception.CategoryAlreadyExistsException;
+import br.com.opeads.exception.CategoryDoesNotExistsException;
 
 @ControllerAdvice
 public class CategoryExceptionHandler {

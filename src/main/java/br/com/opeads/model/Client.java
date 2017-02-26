@@ -17,39 +17,39 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "client")
 public class Client implements Serializable{
 
 
 	private static final long serialVersionUID = 604341977370563622L;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "id_cliente")
+	@Column(name = "id_client")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "dt_criacao")
+	@Column(name = "dt_creation")
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private Date creation;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "inativo",columnDefinition = "BIT DEFAULT 0")
+	@Column(name = "inactive",columnDefinition = "BIT DEFAULT 0")
 	private Boolean inactive;
 	
 	@JsonInclude(Include.NON_EMPTY)
 	@OneToMany(mappedBy = "client")
-	@Column(name = "contato")
+	@Column(name = "contact")
 	private List<Contact> contact;
 	
 	@JsonInclude(Include.NON_EMPTY)
 	@OneToMany(mappedBy = "client")
-	@Column(name = "endereco")
+	@Column(name = "address")
 	private List<Address> address;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Column(name = "nome")
+	@Column(name = "name_client")
 	private String name;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -58,7 +58,7 @@ public class Client implements Serializable{
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "razao")
-	private String reason;
+	private String razao;
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "cnpj")
@@ -120,12 +120,12 @@ public class Client implements Serializable{
 		this.cpf = cpf;
 	}
 
-	public String getReason() {
-		return reason;
+	public String getRazao() {
+		return razao;
 	}
 
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setRazao(String razao) {
+		this.razao = razao;
 	}
 
 	public String getCnpj() {

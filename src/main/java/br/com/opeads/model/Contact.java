@@ -1,6 +1,7 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,40 +11,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "contato")
 public class Contact implements Serializable {
 
 
 	private static final long serialVersionUID = 1931261945393688431L;
 
-	@Column(name = "id_contato")
+	@Column(name = "id_contact")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cliente")
+	@JoinColumn(name = "id_client")
 	private Client client;
 	
-	@Column(name = "telefone")
-	private String phone;
+	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+	private List<CellPhone> cellPhone;
 	
-	@Column(name = "celular")
-	private String cellPhone;
+	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+	private List<Phone> phone;
 	
-	@Column(name = "email")
-	private String email;
+	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+	private List<Email> email;
 	
-	@Column(name = "descricao")
-	private String description;
+	@Column(name = "name_contact")
+	private String contactName;
 
-		
 	public Long getId() {
 		return id;
 	}
@@ -60,36 +59,36 @@ public class Contact implements Serializable {
 		this.client = client;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getCellPhone() {
+	public List<CellPhone> getCellPhone() {
 		return cellPhone;
 	}
 
-	public void setCellPhone(String cellPhone) {
+	public void setCellPhone(List<CellPhone> cellPhone) {
 		this.cellPhone = cellPhone;
 	}
 
-	public String getEmail() {
+	public List<Phone> getPhone() {
+		return phone;
+	}
+
+	public void setPhone(List<Phone> phone) {
+		this.phone = phone;
+	}
+
+	public List<Email> getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(List<Email> email) {
 		this.email = email;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getContactName() {
+		return contactName;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
 	}
 
 	@Override

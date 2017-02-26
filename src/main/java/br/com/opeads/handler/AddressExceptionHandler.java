@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.opeads.Exception.AddressAlreadyExistsException;
-import br.com.opeads.Exception.AddressDoesNotExistsException;
 import br.com.opeads.error.model.Error;
+import br.com.opeads.exception.AddressAlreadyExistsException;
+import br.com.opeads.exception.AddressDoesNotExistsException;
 
 @ControllerAdvice
 public class AddressExceptionHandler {

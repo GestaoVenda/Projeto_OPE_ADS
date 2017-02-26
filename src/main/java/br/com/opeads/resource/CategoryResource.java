@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,5 +47,10 @@ public class CategoryResource {
 	public ResponseEntity<Void> delete(@RequestBody Category category){
 		categoryService.delete(category);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/get/categoria")
+	public ResponseEntity<Category> get(@PathVariable("id") Category category){
+		return ResponseEntity.ok().body(categoryService.findById(category));
 	}
 }
