@@ -32,7 +32,7 @@ public class EmailService implements GenericInterfaceService<Email>{
 	
 	public Email create(Long id, Email email) {
 		Email check = null;
-		contact = null;
+		contact = new Contact();
 		contact.setId(id);
 		contact = contactService.findById(contact);
 		if(email.getId() != null)check = emailRepository.findOne(email.getId());

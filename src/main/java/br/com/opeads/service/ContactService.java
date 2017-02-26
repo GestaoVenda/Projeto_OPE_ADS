@@ -48,7 +48,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	//Here we save the contact by relating it with the client
 	//After this, we call the service to save the @OneToMany Contact attributes
 	public Contact create(Long id, Contact contact) {
-		client = null;
+		client = new Client();
 		Contact check = null;
 		client.setId(id);
 		client = clientService.findById(client);

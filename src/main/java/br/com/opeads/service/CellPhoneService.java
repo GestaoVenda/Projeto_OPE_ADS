@@ -27,7 +27,7 @@ private static final long serialVersionUID = 4682415633538544201L;
 	
 	public CellPhone create(Long id, CellPhone cellPhone) {
 		CellPhone check = null;
-		contact = null;
+		contact = new Contact();
 		contact.setId(id);
 		contact = contactService.findById(contact);
 		if(cellPhone.getId() != null)check = cellPhoneRepository.findOne(cellPhone.getId());

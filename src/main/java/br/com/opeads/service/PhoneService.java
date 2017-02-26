@@ -29,7 +29,7 @@ public class PhoneService implements GenericInterfaceService<Phone>{
 	private Contact contact;
 	
 	public Phone create(Long id,Phone phone) {
-		contact = null;
+		contact = new Contact();
 		Phone check = null;
 		contact.setId(id);
 		contact = contactService.findById(contact);
