@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.opeads.exception.PhoneAlreadyExistsException;
 import br.com.opeads.exception.PhoneDoesNotExistsException;
+import br.com.opeads.model.Contact;
 import br.com.opeads.model.Phone;
 import br.com.opeads.repository.PhoneRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -22,10 +23,19 @@ public class PhoneService implements GenericInterfaceService<Phone>{
 	@Autowired
 	private PhoneRepository phoneRepository;
 	
-	public Phone create(Phone phone) {
+	@Autowired
+	private ContactService contactService;
+
+	private Contact contact;
+	
+	public Phone create(Long id,Phone phone) {
+		contact = null;
 		Phone check = null;
+		contact.setId(id);
+		contact = contactService.findById(contact);
 		if(phone.getId() != null)check = phoneRepository.findOne(phone.getId());
 		if(check != null)throw new PhoneAlreadyExistsException("O telefone informado já existe");
+		phone.setContact(contact);
 		return phoneRepository.save(phone);
 	}
 

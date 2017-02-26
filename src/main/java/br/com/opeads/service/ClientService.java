@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.opeads.exception.ClientAlreadyExistsException;
 import br.com.opeads.exception.ClientDoesNotExistsException;
+import br.com.opeads.model.Address;
 import br.com.opeads.model.Client;
+import br.com.opeads.model.Contact;
 import br.com.opeads.repository.ClientRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
@@ -19,18 +21,33 @@ public class ClientService implements GenericInterfaceService<Client>{
 	@Autowired
 	private ClientRepository clientRepository;
 	
+	@Autowired
+	private ContactService contactService;
+	
+	@Autowired
+	private AddressService addressService;
+	
 	@Override
 	public List<Client> read() {
 		return clientRepository.findAll();
 	}
 
+	//Here we save the client
+	//After this, we call the service to save the @OneToMany Client attributes
 	public Client create(Client client) {
 		Client check = null;
 		if(client.getId() != null)check = clientRepository.findOne(client.getId());
 		if(client.getCnpj() != null)check = clientRepository.findByCnpj(client.getCnpj());
 		if(client.getCpf() != null)check = clientRepository.findByCpf(client.getCpf());
 		if(check != null)throw new ClientAlreadyExistsException("O cliente informado já existe");
-		return clientRepository.save(client);
+		check = clientRepository.save(client);  
+		for(Contact contact: client.getContacts()){
+			contactService.create(check.getId(), contact);
+		}
+		for(Address address: client.getAddresses()){
+			addressService.create(check.getId(), address);
+		}
+		return check ;
 	}
 
 	public void update(Client  client) {

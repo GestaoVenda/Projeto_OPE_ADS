@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,14 +41,14 @@ public class Client implements Serializable{
 	private Boolean inactive;
 	
 	@JsonInclude(Include.NON_EMPTY)
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client", fetch=FetchType.LAZY)
 	@Column(name = "contact")
-	private List<Contact> contact;
+	private List<Contact> contacts;
 	
 	@JsonInclude(Include.NON_EMPTY)
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client", fetch=FetchType.LAZY)
 	@Column(name = "address")
-	private List<Address> address;
+	private List<Address> addresses;
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "name_client")
@@ -88,20 +90,20 @@ public class Client implements Serializable{
 		this.inactive = inactive;
 	}
 
-	public List<Contact> getContact() {
-		return contact;
+	public List<Contact> getContacts() {
+		return contacts;
 	}
 
-	public void setContact(List<Contact> contact) {
-		this.contact = contact;
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
 
-	public List<Address> getAddress() {
-		return address;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(List<Address> address) {
-		this.address = address;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	public String getName() {

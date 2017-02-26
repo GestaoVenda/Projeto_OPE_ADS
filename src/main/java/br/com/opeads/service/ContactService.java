@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.opeads.exception.ClientDoesNotExistsException;
 import br.com.opeads.exception.ContactAlreadyExistsException;
+import br.com.opeads.model.CellPhone;
 import br.com.opeads.model.Client;
 import br.com.opeads.model.Contact;
+import br.com.opeads.model.Email;
+import br.com.opeads.model.Phone;
 import br.com.opeads.repository.ContactRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
@@ -26,20 +29,43 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	@Autowired
 	private ClientService clientService;
 	
+	@Autowired
+	private PhoneService phoneService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private CellPhoneService cellphoneService;
+
+	private Client client;
+	
 	@Override
 	public List<Contact> read() {
 		return contactRepository.findAll();
 	}
 
+	//Here we save the contact by relating it with the client
+	//After this, we call the service to save the @OneToMany Contact attributes
 	public Contact create(Long id, Contact contact) {
-		Client client = new Client();
+		client = null;
 		Contact check = null;
 		client.setId(id);
 		client = clientService.findById(client);
 		if(contact.getId() != null)check = contactRepository.findOne(contact.getId());
 		if(check != null)throw new ContactAlreadyExistsException("O contato informado já existe");
 		contact.setClient(client);
-		return contactRepository.save(contact);
+		check = contactRepository.save(contact);
+		for(Phone phone: contact.getPhones()){
+			phoneService.create(check.getId(), phone);
+		}
+		for(CellPhone cellPhone: contact.getCellPhones()){
+			cellphoneService.create(check.getId(), cellPhone);
+		}
+		for(Email email: contact.getEmails()){
+			emailService.create(check.getId(),email);
+		}
+		return check;
 	}
 
 	public void update(Long id,Contact contact) {

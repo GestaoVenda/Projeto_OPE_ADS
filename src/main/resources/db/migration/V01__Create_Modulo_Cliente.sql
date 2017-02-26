@@ -42,6 +42,6 @@ CREATE TABLE endereco (
   PRIMARY KEY(id_endereco),
   FOREIGN KEY(id_cliente)
     REFERENCES cliente(id_cliente)
-      ON DELETE CASCADE
+     ON DELETE CASCADE
       ON UPDATE NO ACTION
 );

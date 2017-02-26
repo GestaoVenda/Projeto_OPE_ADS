@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.opeads.exception.EmailAlreadyExistsException;
 import br.com.opeads.exception.EmailDoesNotExistsException;
+import br.com.opeads.model.Contact;
 import br.com.opeads.model.Email;
 import br.com.opeads.repository.EmailRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
@@ -18,13 +19,25 @@ public class EmailService implements GenericInterfaceService<Email>{
 	 * 
 	 */
 	private static final long serialVersionUID = 2606593246828682266L;
+	
+	
 	@Autowired
 	private EmailRepository emailRepository;
 	
-	public Email create(Email email) {
+	@Autowired
+	private ContactService contactService;
+
+
+	private Contact contact;
+	
+	public Email create(Long id, Email email) {
 		Email check = null;
+		contact = null;
+		contact.setId(id);
+		contact = contactService.findById(contact);
 		if(email.getId() != null)check = emailRepository.findOne(email.getId());
 		if(check != null)throw new EmailAlreadyExistsException("O email informado já existe");
+		email.setContact(contact);
 		return emailRepository.save(email);
 	}
 

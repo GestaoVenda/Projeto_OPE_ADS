@@ -33,7 +33,7 @@ public class ClientResource {
 	@RequestMapping(value = "/save/cliente",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> inserir(@RequestBody Client client){
 		client = clientService.create(client);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/find/cliente/"+client.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/get/cliente/"+client.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	

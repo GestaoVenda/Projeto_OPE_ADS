@@ -1,12 +1,13 @@
 USE ope;
 
-/*DROP TABLE perfil_tela_permissao;
+DROP TABLE perfil_tela_permissao;
 DROP TABLE perfil_tela;
 DROP TABLE usuario_perfil;
 DROP TABLE perfil;
 DROP TABLE usuario;
 DROP TABLE tela;
-DROP TABLE permissao;*/
+DROP TABLE permissao;
+
 
 CREATE TABLE usuario (
   id_usuario BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,

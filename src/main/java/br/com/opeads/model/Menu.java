@@ -1,40 +1,45 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import javax.persistence.ManyToMany;
 
 @Entity
-@Table(name = "email_contact")
-public class Email implements Serializable {
+public class Menu implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3241134543161535984L;
+	private static final long serialVersionUID = 7250996253755785016L;
 
-	@Column(name = "id_email")
+	
+	@Column(name = "id_menu")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
-	@ManyToOne
-	@JoinColumn(name = "id_contact")
-	private Contact contact;
+	@Column(name = "name_menu")
+	private String name;
 	
-	private String email;
+	@Column(name = "url_menu")
+	private String url;
+	
+	@ManyToMany(mappedBy = "menus")
+	private List<Type> types;
+
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setType(List<Type> types) {
+		this.types = types;
+	}
 
 	public Long getId() {
 		return id;
@@ -44,20 +49,20 @@ public class Email implements Serializable {
 		this.id = id;
 	}
 
-	public Contact getContact() {
-		return contact;
+	public String getName() {
+		return name;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
@@ -76,7 +81,7 @@ public class Email implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Email other = (Email) obj;
+		Menu other = (Menu) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

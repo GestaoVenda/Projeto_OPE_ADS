@@ -3,6 +3,7 @@ package br.com.opeads.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,18 +28,18 @@ public class Contact implements Serializable {
 	private Long id;
 	
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_client")
 	private Client client;
 	
 	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
-	private List<CellPhone> cellPhone;
+	private List<CellPhone> cellPhones;
 	
 	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
-	private List<Phone> phone;
+	private List<Phone> phones;
 	
 	@OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
-	private List<Email> email;
+	private List<Email> emails;
 	
 	@Column(name = "name_contact")
 	private String contactName;
@@ -59,28 +60,28 @@ public class Contact implements Serializable {
 		this.client = client;
 	}
 
-	public List<CellPhone> getCellPhone() {
-		return cellPhone;
+	public List<CellPhone> getCellPhones() {
+		return cellPhones;
 	}
 
-	public void setCellPhone(List<CellPhone> cellPhone) {
-		this.cellPhone = cellPhone;
+	public void setCellPhones(List<CellPhone> cellPhones) {
+		this.cellPhones = cellPhones;
 	}
 
-	public List<Phone> getPhone() {
-		return phone;
+	public List<Phone> getPhones() {
+		return phones;
 	}
 
-	public void setPhone(List<Phone> phone) {
-		this.phone = phone;
+	public void setPhones(List<Phone> phones) {
+		this.phones = phones;
 	}
 
-	public List<Email> getEmail() {
-		return email;
+	public List<Email> getEmails() {
+		return emails;
 	}
 
-	public void setEmail(List<Email> email) {
-		this.email = email;
+	public void setEmails(List<Email> emails) {
+		this.emails = emails;
 	}
 
 	public String getContactName() {

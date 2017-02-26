@@ -22,14 +22,17 @@ private static final long serialVersionUID = 4682415633538544201L;
 	
 	@Autowired
 	private ContactService contactService;
+
+	private Contact contact;
 	
 	public CellPhone create(Long id, CellPhone cellPhone) {
 		CellPhone check = null;
-		Contact contact = null;
+		contact = null;
 		contact.setId(id);
 		contact = contactService.findById(contact);
 		if(cellPhone.getId() != null)check = cellPhoneRepository.findOne(cellPhone.getId());
 		if(check != null)throw new CellPhoneAlreadyExistsException("O celular informado já existe");
+		cellPhone.setContact(contact);
 		return cellPhoneRepository.save(cellPhone);
 	}
 

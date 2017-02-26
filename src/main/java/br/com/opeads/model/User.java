@@ -2,12 +2,14 @@ package br.com.opeads.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -64,6 +66,17 @@ public class User implements Serializable {
 	@JsonInclude(Include.NON_NULL)
 	@OneToOne(mappedBy = "user")
 	private UserAddress address;
+	
+	@ManyToMany(mappedBy = "users")
+	private List<Type> types;
+
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setType(List<Type> types) {
+		this.types = types;
+	}
 
 	public Long getId() {
 		return id;

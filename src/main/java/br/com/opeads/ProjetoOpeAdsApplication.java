@@ -23,11 +23,12 @@ public class ProjetoOpeAdsApplication {
 		return new FixedLocaleResolver(new Locale("pt","BR"));
 	}
 	
+/*
 	@Bean
 	public FilterRegistrationBean filtroJWT(){
 		FilterRegistrationBean frb = new FilterRegistrationBean();
 		frb.setFilter(new AuthFilter());
 		frb.addUrlPatterns("/api/list/*","/api/save/*","/api/edit/*","/api/delete/*");
 		return frb;
-	}
+	}*/
 }
