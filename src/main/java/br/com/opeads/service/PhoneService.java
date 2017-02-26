@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.opeads.exception.PhoneAlreadyExistsException;
 import br.com.opeads.exception.PhoneDoesNotExistsException;
-import br.com.opeads.model.Address;
-import br.com.opeads.model.Contact;
 import br.com.opeads.model.Contact;
 import br.com.opeads.model.Phone;
 import br.com.opeads.repository.PhoneRepository;
