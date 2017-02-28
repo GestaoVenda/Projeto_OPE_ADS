@@ -19,7 +19,7 @@ import br.com.opeads.service.ContactService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ContactResource {
 
 	@Autowired
@@ -33,7 +33,7 @@ public class ContactResource {
 	@RequestMapping(value = "/cliente/{id}/save/contato",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@PathVariable("id") Long id,@RequestBody Contact contact){
 		contact = contactService.create(id, contact);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/cliente/"+contact.getClient().getId()+"/find/contato/"+contact.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/cliente/get/contato/"+contact.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	

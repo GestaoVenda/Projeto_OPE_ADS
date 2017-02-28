@@ -6,16 +6,22 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "user")
@@ -67,15 +73,18 @@ public class User implements Serializable {
 	@OneToOne(mappedBy = "user")
 	private UserAddress address;
 	
-	@ManyToMany(mappedBy = "users")
-	private List<Type> types;
 
-	public List<Type> getTypes() {
-		return types;
+	@ManyToMany
+	@JoinTable(name = "user_group",joinColumns = @JoinColumn(name = "fk_id_user"),
+	inverseJoinColumns = @JoinColumn(name = "fk_id_group"))
+	private List<Group> groups;
+
+	public List<Group> getGroups() {
+		return groups;
 	}
 
-	public void setType(List<Type> types) {
-		this.types = types;
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
 	}
 
 	public Long getId() {

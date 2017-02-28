@@ -33,7 +33,7 @@ public class MeasureResource {
 	@RequestMapping(value = "/save/medida", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@RequestBody Measure measure){
 		measure = measureService.create(measure);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/find/medida/"+measure.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/get/medida/"+measure.getId()).build().toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	

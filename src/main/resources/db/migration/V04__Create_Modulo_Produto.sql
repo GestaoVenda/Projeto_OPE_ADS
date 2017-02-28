@@ -1,50 +1,49 @@
 USE ope;
-create table categoria (
-	id_categoria BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nome_categoria varchar(100) NOT NULL,
-    ativo BIT NOT NULL DEFAULT 1,
-    PRIMARY KEY(id_categoria)
+create table category (
+	id_category BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name_category varchar(100) NOT NULL,
+    active BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY(id_category)
 );
 
-create table medida (
-	id_medida BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	nome_medida varchar(100) NOT NULL,
-    PRIMARY KEY(id_medida)
+create table measure (
+	id_measure BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	name_measure varchar(100) NOT NULL,
+    PRIMARY KEY(id_measure)
 );
 
-create table produto (
-	id_produto BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nome varchar(100),
-    descricao varchar(200),
-    id_categoria BIGINT UNSIGNED NOT NULL,
-    id_medida BIGINT UNSIGNED NOT NULL,
-    preco_custo Double(10,2) DEFAULT 0,
-    preco_venda Double(10,2),
-    estoque INT UNSIGNED NOT NULL DEFAULT 0,
-    estoque_min INT UNSIGNED NOT NULL DEFAULT 0,
-    estoque_max INT UNSIGNED NULL,
-    permite_fracionamento BIT NOT NULL DEFAULT 0,
-    item_fracionado BIT NOT NULL DEFAULT 0,
-    validade datetime NULL,
-    ativo BIT NOT NULL DEFAULT 1,
-    PRIMARY KEY(id_produto),
-    FOREIGN KEY(id_categoria)
-		REFERENCES categoria(id_categoria)
+create table product (
+	id_product BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name_product varchar(100),
+    description varchar(200),
+    id_category BIGINT UNSIGNED NOT NULL,
+    id_measure BIGINT UNSIGNED NOT NULL,
+    cost_price Double(10,2) DEFAULT 0,
+    sale_price Double(10,2),
+    stock INT UNSIGNED NOT NULL DEFAULT 0,
+    min_stock INT UNSIGNED NOT NULL DEFAULT 0,
+    max_stock INT UNSIGNED NULL,
+    allows_fractionation BIT NOT NULL DEFAULT 0,
+    fractionated_item BIT NOT NULL DEFAULT 0,
+    validity datetime NULL,
+    active BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY(id_product),
+    FOREIGN KEY(id_category)
+		REFERENCES category(id_category)
 		ON DELETE CASCADE
 		ON UPDATE NO ACTION,
-	FOREIGN KEY(id_medida)
-		REFERENCES medida(id_medida)
+	FOREIGN KEY(id_measure)
+		REFERENCES measure(id_measure)
 		ON DELETE CASCADE
 		ON UPDATE NO ACTION
 );
 
-create table item_fracao (
-	id_produto BIGINT UNSIGNED NOT NULL,
-    id_produto_unidade BIGINT UNSIGNED NOT NULL,
-    
-    PRIMARY KEY(id_produto),
-    FOREIGN KEY(id_produto)
-		REFERENCES produto(id_produto),
-	FOREIGN KEY(id_produto_unidade)
-		REFERENCES produto(id_produto)
+create table fractionated_item (
+	id_product BIGINT UNSIGNED NOT NULL,
+    id_unit_product BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY(id_product),
+    FOREIGN KEY(id_product)
+		REFERENCES product(id_product),
+	FOREIGN KEY(id_unit_product)
+		REFERENCES product(id_product)
 );

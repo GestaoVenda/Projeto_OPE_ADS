@@ -33,7 +33,7 @@ public class UserResource {
 	@RequestMapping(value = "/save/usuario",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@RequestBody User user){
 		user = userService.create(user);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/find/usuario/"+user.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/get/usuario/"+user.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	

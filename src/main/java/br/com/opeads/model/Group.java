@@ -12,44 +12,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
-public class Type implements Serializable{
+public class Group implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6991959437151060736L;
+	private static final long serialVersionUID = 6174346181494880269L;
 
-	@Column(name = "id_type")
+	@Column(name = "id_group")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name_type")
+	@Column(name = "name_group")
 	private String name;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToMany
-	@JoinTable(name = "user_type", joinColumns = @JoinColumn(name = "fk_id_type"), inverseJoinColumns = @JoinColumn(name = "fk_id_user"))
-	private List<User> users;
+	@JoinTable(name = "group_permission",joinColumns = @JoinColumn(name = "fk_id_group"),
+	inverseJoinColumns = @JoinColumn(name = "fk_id_permission"))
+	private List<Permission> permissions;
 	
-	@ManyToMany
-	@JoinTable(name = "type_menu", joinColumns = @JoinColumn(name = "fk_id_type"), inverseJoinColumns = @JoinColumn(name = "fk_id_menu"))
-	private List<Menu> menus;
-	
-	public List<Menu> getMenus() {
-		return menus;
+	public List<Permission> getPermissions() {
+		return permissions;
 	}
 
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
 	}
 
 	public Long getId() {
@@ -84,7 +77,7 @@ public class Type implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Type other = (Type) obj;
+		Group other = (Group) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

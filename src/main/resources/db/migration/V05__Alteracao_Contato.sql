@@ -1,13 +1,13 @@
 use ope;
 
-DROP TABLE contato;
+DROP TABLE contact;
 
 CREATE TABLE contact (
     id_contact BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     id_client BIGINT UNSIGNED NOT NULL,
     name_contact VARCHAR(150),
     FOREIGN KEY (id_client)
-        REFERENCES cliente (id_cliente)
+        REFERENCES client (id_client)
         ON DELETE CASCADE ON UPDATE NO ACTION,
     PRIMARY KEY (id_contact)
 );

@@ -1,38 +1,34 @@
 use ope;
 
-CREATE TABLE menu (
-    id_menu BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name_menu VARCHAR(100) NOT NULL,
-    url_menu VARCHAR(100) NOT NULL,
-    PRIMARY KEY (id_menu)
+CREATE TABLE `group` (
+    id_group BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name_group VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id_group)
 );
 
-CREATE TABLE `type` (
-    id_type BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name_type VARCHAR(100) NOT NULL,
-    PRIMARY KEY (id_type)
+CREATE TABLE `permission` (
+    id_permission BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name_permission VARCHAR(100) NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id_permission)
 );
 
-CREATE TABLE type_menu (
-    fk_id_menu BIGINT UNSIGNED NOT NULL,
-    fk_id_type BIGINT UNSIGNED NOT NULL,
-    FOREIGN KEY (fk_id_menu)
-        REFERENCES menu (id_menu)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
-    FOREIGN KEY (fk_id_type)
-        REFERENCES `type` (id_type)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
-    PRIMARY KEY (fk_id_menu , fk_id_type)
-);
-
-CREATE TABLE user_type (
+CREATE TABLE `user_group` (
     fk_id_user BIGINT UNSIGNED NOT NULL,
-    fk_id_type BIGINT UNSIGNED NOT NULL,
+    fk_id_group BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (fk_id_user, fk_id_group),
     FOREIGN KEY (fk_id_user)
-        REFERENCES usuario (id_usuario)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
-    FOREIGN KEY (fk_id_type)
-        REFERENCES `type` (id_type)
-        ON DELETE CASCADE ON UPDATE NO ACTION,
-    PRIMARY KEY (fk_id_user , fk_id_type)
+        REFERENCES user (id_user),
+    FOREIGN KEY (fk_id_group)
+        	REFERENCES `group` (id_group)   
+);
+
+CREATE TABLE `group_permission` (
+    fk_id_group BIGINT UNSIGNED NOT NULL,
+    fk_id_permission BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (fk_id_group, fk_id_permission),
+    FOREIGN KEY (fk_id_group)
+        REFERENCES `group` (id_group),
+    FOREIGN KEY (fk_id_permission)
+        	REFERENCES `permission` (id_permission)   
 );

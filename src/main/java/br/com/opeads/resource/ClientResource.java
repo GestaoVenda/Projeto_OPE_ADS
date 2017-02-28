@@ -19,7 +19,7 @@ import br.com.opeads.service.ClientService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ClientResource {
 	
 	@Autowired

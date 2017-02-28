@@ -33,7 +33,7 @@ public class ProductResource {
 	@RequestMapping(value = "/save/produto", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@RequestBody Product product){
 		product = productService.create(product);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/find/produto/"+product.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/get/produto/"+product.getId()).build().toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	

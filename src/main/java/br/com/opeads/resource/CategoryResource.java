@@ -33,7 +33,7 @@ public class CategoryResource {
 	@RequestMapping(value = "/save/categoria", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@RequestBody Category category){
 		category = categoryService.create(category);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/find/categoria/"+category.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/get/categoria/"+category.getId()).build().toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	

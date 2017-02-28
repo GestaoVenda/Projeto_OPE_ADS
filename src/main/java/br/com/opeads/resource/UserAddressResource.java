@@ -33,7 +33,7 @@ public class UserAddressResource {
 	@RequestMapping(value = "/usuario/{id}/save/endereco",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@PathVariable("id") Long id, @RequestBody UserAddress userAddress){
 		userAddress = userAddressService.create(id, userAddress);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/usuario/"+userAddress.getUser().getId()+"/find/endereco/"+userAddress.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/usuario/get/endereco/"+userAddress.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	

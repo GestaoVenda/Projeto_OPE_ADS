@@ -21,7 +21,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/auth/login")
+@RequestMapping(value = "/api/auth/login", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class AuthResource {
 
 	@Autowired

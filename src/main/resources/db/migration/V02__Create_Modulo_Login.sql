@@ -71,6 +71,7 @@ CREATE TABLE perfil_tela_permissao (
       ON DELETE CASCADE
       ON UPDATE CASCADE
 );
+
 # POPULAR DADOS permissao
 INSERT INTO permissao(tipo) VALUES('CREATE');
 INSERT INTO permissao(tipo) VALUES('READ');

@@ -49,10 +49,13 @@ public class UserService implements GenericInterfaceService<User> {
 	}
 
 	@Override
-	public User findById(User user) {
+	public User findById(User user){
 		User check = null;
-		check = userRepository.findOne(user.getId());
-		if(check == null)throw new UserDoesNotExistsException("O usuário informado não existe");
+		try{
+			check = userRepository.findOne(user.getId());
+		}catch(RuntimeException e){
+			throw new UserDoesNotExistsException("O usuário informado não existe");
+		}		
 		return userRepository.findOne(user.getId());
 	}
 

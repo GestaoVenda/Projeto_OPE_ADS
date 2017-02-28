@@ -19,7 +19,7 @@ import br.com.opeads.service.AddressService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class AddressResource{
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class AddressResource{
 	@RequestMapping(value = "/cliente/{id}/save/endereco",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> create(@PathVariable("id") Long id,@RequestBody Address address){
 		address = addressService.create(id, address);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/cliente/"+address.getClient().getId()+"/find/endereco/"+address.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/cliente/get/endereco/"+address.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	

@@ -1,45 +1,31 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
-public class Menu implements Serializable{
+public class Permission implements Serializable{
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7250996253755785016L;
+	private static final long serialVersionUID = -7852639594055565089L;
 
-	
-	@Column(name = "id_menu")
+	@Column(name = "id_permission")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name_menu")
+	@Column(name = "name_permission")
 	private String name;
 	
-	@Column(name = "url_menu")
-	private String url;
-	
-	@ManyToMany(mappedBy = "menus")
-	private List<Type> types;
-
-	public List<Type> getTypes() {
-		return types;
-	}
-
-	public void setType(List<Type> types) {
-		this.types = types;
-	}
+	private String state;
 
 	public Long getId() {
 		return id;
@@ -57,12 +43,12 @@ public class Menu implements Serializable{
 		this.name = name;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getState() {
+		return state;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	@Override
@@ -81,7 +67,7 @@ public class Menu implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Menu other = (Menu) obj;
+		Permission other = (Permission) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
