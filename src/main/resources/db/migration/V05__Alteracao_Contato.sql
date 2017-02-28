@@ -45,3 +45,4 @@ CREATE TABLE email_contact (
         ON DELETE CASCADE ON UPDATE NO ACTION,
     PRIMARY KEY (id_email)
 );
+
