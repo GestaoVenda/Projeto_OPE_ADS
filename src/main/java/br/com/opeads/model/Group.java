@@ -11,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
+@Table(name = "\"Group\"")
 public class Group implements Serializable{
 
 	/**
@@ -31,7 +33,6 @@ public class Group implements Serializable{
 	@Column(name = "name_group")
 	private String name;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToMany
 	@JoinTable(name = "group_permission",joinColumns = @JoinColumn(name = "fk_id_group"),
 	inverseJoinColumns = @JoinColumn(name = "fk_id_permission"))
