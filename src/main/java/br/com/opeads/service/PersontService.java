@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.exception.ClientAlreadyExistsException;
-import br.com.opeads.exception.ClientDoesNotExistsException;
+import br.com.opeads.exception.PersonAlreadyExistsException;
+import br.com.opeads.exception.PersonDoesNotExistsException;
 import br.com.opeads.model.Address;
-import br.com.opeads.model.Client;
+import br.com.opeads.model.Person;
 import br.com.opeads.model.Contact;
 import br.com.opeads.repository.ClientRepository;
 import br.com.opeads.service.genericinterfaceservice.GenericInterfaceService;
 
 @Service
-public class ClientService implements GenericInterfaceService<Client>{
+public class PersontService implements GenericInterfaceService<Person>{
 
 	private static final long serialVersionUID = -2564111722295953590L;
 	
@@ -28,18 +28,18 @@ public class ClientService implements GenericInterfaceService<Client>{
 	private AddressService addressService;
 	
 	@Override
-	public List<Client> read() {
+	public List<Person> read() {
 		return clientRepository.findAll();
 	}
 
 	//Here we save the client
 	//After this, we call the service to save the @OneToMany Client attributes
-	public Client create(Client client) {
-		Client check = null;
+	public Person create(Person client) {
+		Person check = null;
 		if(client.getId() != null)check = clientRepository.findOne(client.getId());
 		if(client.getCnpj() != null)check = clientRepository.findByCnpj(client.getCnpj());
 		if(client.getCpf() != null)check = clientRepository.findByCpf(client.getCpf());
-		if(check != null)throw new ClientAlreadyExistsException("O cliente informado já existe");
+		if(check != null)throw new PersonAlreadyExistsException("O cliente informado já existe");
 		check = clientRepository.save(client);  
 		for(Contact contact: client.getContacts()){
 			contactService.create(check.getId(), contact);
@@ -50,7 +50,7 @@ public class ClientService implements GenericInterfaceService<Client>{
 		return check ;
 	}
 
-	public void update(Client  client) {
+	public void update(Person  client) {
 		findById(client);
 		clientRepository.save(client);
 		for(Contact contact: client.getContacts()){
@@ -62,15 +62,15 @@ public class ClientService implements GenericInterfaceService<Client>{
 	}
 
 	@Override
-	public void delete(Client  client) {
+	public void delete(Person  client) {
 		findById(client);
 		clientRepository.delete(client);
 	}
 
 	@Override
-	public Client findById(Client client) {
-		Client check = clientRepository.findOne(client.getId());
-		if(check == null)throw new ClientDoesNotExistsException("O cliente informado não existe");
+	public Person findById(Person client) {
+		Person check = clientRepository.findOne(client.getId());
+		if(check == null)throw new PersonDoesNotExistsException("O cliente informado não existe");
 		return check;
 	}
 

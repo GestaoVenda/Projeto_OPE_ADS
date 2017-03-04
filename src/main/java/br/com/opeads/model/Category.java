@@ -15,11 +15,13 @@ import javax.persistence.Table;
 @Table(name = "category")
 public class Category implements Serializable{
 
+	
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2212985440583481675L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "id_category")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

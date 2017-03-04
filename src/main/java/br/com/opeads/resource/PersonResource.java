@@ -14,43 +14,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.opeads.model.Client;
-import br.com.opeads.service.ClientService;
+import br.com.opeads.model.Person;
+import br.com.opeads.service.PersontService;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-public class ClientResource {
+public class PersonResource {
 	
 	@Autowired
-	private ClientService clientService;
+	private PersontService clientService;
 	
 	@RequestMapping(value = "/list/cliente",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<Client>> read(){
+	public ResponseEntity<List<Person>> read(){
 		return ResponseEntity.ok().body(clientService.read());
 	}
 	
 	@RequestMapping(value = "/save/cliente",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Void> inserir(@RequestBody Client client){
+	public ResponseEntity<Void> inserir(@RequestBody Person client){
 		client = clientService.create(client);
 		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/get/cliente/"+client.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	
 	@RequestMapping(value = "/edit/cliente",method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Void> update(@RequestBody Client client){
+	public ResponseEntity<Void> update(@RequestBody Person client){
 		clientService.update(client);
 		return ResponseEntity.accepted().build() ;
 	}
 	
 	@RequestMapping(value = "/delete/cliente",method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Void> delete(@RequestBody Client client){
+	public ResponseEntity<Void> delete(@RequestBody Person client){
 		clientService.delete(client);
 		return ResponseEntity.noContent().build();
 	}
 
 	@RequestMapping(value = "/get/cliente/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Client> getById(@PathVariable("id") Client client){
+	public ResponseEntity<Person> getById(@PathVariable("id") Person client){
 		return ResponseEntity.ok().body(clientService.findById(client));
 	}
 }

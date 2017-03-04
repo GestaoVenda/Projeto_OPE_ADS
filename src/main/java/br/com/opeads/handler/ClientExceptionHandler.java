@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.opeads.error.model.Error;
-import br.com.opeads.exception.ClientAlreadyExistsException;
-import br.com.opeads.exception.ClientDoesNotExistsException;
+import br.com.opeads.exception.PersonAlreadyExistsException;
+import br.com.opeads.exception.PersonDoesNotExistsException;
 
 @ControllerAdvice
 public class ClientExceptionHandler {
 
-	@ExceptionHandler(ClientDoesNotExistsException.class)
-	public ResponseEntity<?> handlerClienteNaoExisteException(ClientDoesNotExistsException e,HttpServletRequest request){
+	@ExceptionHandler(PersonDoesNotExistsException.class)
+	public ResponseEntity<?> handlerClienteNaoExisteException(PersonDoesNotExistsException e,HttpServletRequest request){
 		Error erro = new Error();
 		erro.setStatus(204L);
 		erro.setTitle(e.getMessage());
@@ -27,8 +27,8 @@ public class ClientExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 	
-	@ExceptionHandler(ClientAlreadyExistsException.class)
-	public ResponseEntity<?> handlerClienteJaExisteException(ClientAlreadyExistsException e, HttpServletRequest request){
+	@ExceptionHandler(PersonAlreadyExistsException.class)
+	public ResponseEntity<?> handlerClienteJaExisteException(PersonAlreadyExistsException e, HttpServletRequest request){
 		Error erro = new Error();
 		erro.setStatus(409L);
 		erro.setTitle(e.getMessage());

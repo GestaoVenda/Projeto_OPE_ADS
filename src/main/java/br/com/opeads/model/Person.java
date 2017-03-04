@@ -1,6 +1,7 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,42 +13,32 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "address")
-public class Address implements Serializable{
-	
+@Table(name = "person")
+public class Person implements Serializable{
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "id_address")
+
+	@Column(name = "id_person")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String street;
-	
-	private Integer number;
-	
-	private String neighborhood;
-	
-	private String city;
-	
-	private String district;
-	
-	@Column(name = "zipcode")
-	private String zipCode;
-	
-	private String complement;
-	
-	private boolean main;
+	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_id_type_address")
-	private TypeAddress idTypeAddress;
+	@JoinColumn(name = "fk_id_type_person")
+	private TypePerson typePerson;
 	
-	@ManyToOne
-	@JoinColumn(name = "fk_id_person")
-	private Person idPerson;
+	@Column(name = "dt_creation")
+	private Date creation;
+	
+	private boolean active;
+	
+	
+	
 
 }

@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.opeads.exception.ClientDoesNotExistsException;
+import br.com.opeads.exception.PersonDoesNotExistsException;
 import br.com.opeads.exception.ContactAlreadyExistsException;
 import br.com.opeads.model.CellPhone;
-import br.com.opeads.model.Client;
+import br.com.opeads.model.Person;
 import br.com.opeads.model.Contact;
 import br.com.opeads.model.Email;
 import br.com.opeads.model.Phone;
@@ -27,7 +27,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	private ContactRepository contactRepository;
 	
 	@Autowired
-	private ClientService clientService;
+	private PersontService clientService;
 	
 	@Autowired
 	private PhoneService phoneService;
@@ -38,7 +38,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	@Autowired
 	private CellPhoneService cellphoneService;
 
-	private Client client;
+	private Person client;
 	
 	@Override
 	public List<Contact> read() {
@@ -48,7 +48,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	//Here we save the contact by relating it with the client
 	//After this, we call the service to save the @OneToMany Contact attributes
 	public Contact create(Long id, Contact contact) {
-		client = new Client();
+		client = new Person();
 		Contact check = null;
 		client.setId(id);
 		client = clientService.findById(client);
@@ -69,7 +69,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	}
 
 	public void update(Long id,Contact contact) {
-		client = new Client();
+		client = new Person();
 		client.setId(id);
 		client = clientService.findById(client);
 		findById(contact);
@@ -95,7 +95,7 @@ public class ContactService implements GenericInterfaceService<Contact>{
 	@Override
 	public Contact findById(Contact contact) {
 		Contact check = contactRepository.findOne(contact.getId());
-		if(check == null)throw new ClientDoesNotExistsException("O contato informado não existe");
+		if(check == null)throw new PersonDoesNotExistsException("O contato informado não existe");
 		return check;
 	}
 
