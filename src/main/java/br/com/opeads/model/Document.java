@@ -33,4 +33,60 @@ public class Document implements Serializable{
 	
 	private String value;
 
+	public Person getIdPerson() {
+		return idPerson;
+	}
+
+	public void setIdPerson(Person idPerson) {
+		this.idPerson = idPerson;
+	}
+
+	public TypeDocument getIdTypeDocument() {
+		return idTypeDocument;
+	}
+
+	public void setIdTypeDocument(TypeDocument idTypeDocument) {
+		this.idTypeDocument = idTypeDocument;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idPerson == null) ? 0 : idPerson.hashCode());
+		result = prime * result + ((idTypeDocument == null) ? 0 : idTypeDocument.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Document other = (Document) obj;
+		if (idPerson == null) {
+			if (other.idPerson != null)
+				return false;
+		} else if (!idPerson.equals(other.idPerson))
+			return false;
+		if (idTypeDocument == null) {
+			if (other.idTypeDocument != null)
+				return false;
+		} else if (!idTypeDocument.equals(other.idTypeDocument))
+			return false;
+		return true;
+	}
+
+	
 }
