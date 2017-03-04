@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.opeads.model.helpers.PersonTypeDocumentId;
 
 @Entity
 @Table(name = "document")
+@IdClass(PersonTypeDocumentId.class)
 public class Document implements Serializable{
 
 	/**

@@ -1,6 +1,7 @@
 package br.com.opeads.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,8 +21,8 @@ public class SalesmanClient implements Serializable{
 
 	@Id
 	@OneToMany
-	@JoinColumn(name = "fk_id_person_salesman")
-	private Person idSalesman;
+	@JoinColumn(name = "id_person")
+	private List<Person> idSalesmans;
 	
 	@Id
 	@ManyToOne
