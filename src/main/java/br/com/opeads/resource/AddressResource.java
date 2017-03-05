@@ -1,5 +1,6 @@
 package br.com.opeads.resource;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class AddressResource {
 		return ResponseEntity.accepted().build() ;
 	}
 	
-	@RequestMapping(value = "cliente/{id}/delete/endereco",method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value = "/cliente/{id}/delete/endereco",method = RequestMethod.DELETE, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> deleteClientAddress(@RequestBody Address address){
 		addressService.delete(address);
 		return ResponseEntity.noContent().build() ;
@@ -51,15 +52,13 @@ public class AddressResource {
 	
 	@RequestMapping(value = "/get/endereco/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Address> get(@PathVariable("id") Address address){
-		address = addressService.findById(address);
-		System.out.println(">>> "+address.getIdPerson().getId());
-		return ResponseEntity.ok().body(address);
+		return ResponseEntity.ok().body(addressService.findById(address));
 	}
 	
 	@RequestMapping(value = "/usuario/{id}/save/endereco",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Void> createUserAddress(@PathVariable("id") Long id,@RequestBody Address address){
 		address = addressService.createUserAddress(id, address);
-		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/cliente/get/endereco/"+address.getId()).build().toUri();
+		URI uri = ServletUriComponentsBuilder.fromPath("http://localhost:8080/api/usuario/get/endereco/"+address.getId()).build().toUri();
 		return ResponseEntity.created(uri).build() ;
 	}
 	
@@ -73,5 +72,10 @@ public class AddressResource {
 	public ResponseEntity<Void> deleteUserAddress(@RequestBody Address address){
 		addressService.delete(address);
 		return ResponseEntity.noContent().build() ;
+	}
+	
+	@RequestMapping(value = "/endereco/find-by-cep/{zipcode}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Address> get(@PathVariable("zipcode") String zipcode) throws IOException{
+		return ResponseEntity.ok().body(addressService.findZipCode(zipcode));
 	}
 }

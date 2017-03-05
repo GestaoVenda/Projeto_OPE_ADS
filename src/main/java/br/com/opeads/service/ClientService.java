@@ -59,7 +59,7 @@ public class ClientService implements GenericInterfaceService<Person>{
 		}
 		if(client.getDocuments() != null){
 			for(Document document: client.getDocuments()){
-				documentService.create(checkPerson.getId(), document);
+				documentService.createClientDocument(checkPerson.getId(), document);
 			}
 		}
 		return checkPerson ;
@@ -80,7 +80,7 @@ public class ClientService implements GenericInterfaceService<Person>{
 		}
 		if(client.getDocuments() != null){
 			for(Document document: client.getDocuments()){
-				documentService.update(client.getId(), document);
+				documentService.updateClientDocument(client.getId(), document);
 			}
 		}
 	}

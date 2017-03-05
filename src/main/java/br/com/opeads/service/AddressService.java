@@ -1,9 +1,13 @@
 package br.com.opeads.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.github.gilbertotorrezan.viacep.se.ViaCEPClient;
+import com.github.gilbertotorrezan.viacep.shared.ViaCEPEndereco;
 
 import br.com.opeads.exception.AddressAlreadyExistException;
 import br.com.opeads.exception.AddressDoesNotExistException;
@@ -96,5 +100,21 @@ public class AddressService implements GenericInterfaceService<Address> {
 		checkAddress = null;
 		if(address.getId() != null)checkAddress = addressRepository.findOne(address.getId());
 		if(checkAddress != null)throw new AddressAlreadyExistException("O endereço informado já existe!");
+	}
+
+	public Address findZipCode(String zipcode) throws IOException {
+		ViaCEPClient vCClient = new ViaCEPClient();
+		ViaCEPEndereco vCAddress = vCClient.getEndereco(zipcode);
+		try{
+			checkAddress.setDistrict(vCAddress.getUf());
+			checkAddress.setStreet(vCAddress.getLogradouro());
+			checkAddress.setNeighborhood(vCAddress.getBairro());
+			checkAddress.setZipCode(vCAddress.getCep());
+			checkAddress.setCity(vCAddress.getLocalidade());
+			checkAddress.setComplement(vCAddress.getComplemento());
+		}catch(RuntimeException e){
+			throw new AddressDoesNotExistException("O cep informado não existe!");
+		}
+		return checkAddress;
 	}
 }

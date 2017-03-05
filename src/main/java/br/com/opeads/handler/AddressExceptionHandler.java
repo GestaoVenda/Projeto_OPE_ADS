@@ -33,6 +33,7 @@ public class AddressExceptionHandler {
 		erro.setStatus(409L);
 		erro.setTitle(e.getMessage());
 		erro.setDescription("Ocorreu um erro na requisição devido a já existência do dado informado, causando duplicidade");
+		erro.setMessage("Houve um conflito de dados. Para mais informações entre em contato com os desenvolvedores");
 		erro.setTimestamp(new Date());
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
 	}
