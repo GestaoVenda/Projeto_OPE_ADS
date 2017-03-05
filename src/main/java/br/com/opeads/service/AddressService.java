@@ -26,6 +26,9 @@ public class AddressService implements GenericInterfaceService<Address> {
 	@Autowired
 	private ClientService clientService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@Autowired 
 	private Address checkAddress;
 
@@ -35,7 +38,7 @@ public class AddressService implements GenericInterfaceService<Address> {
 	}
 
 	//Here we save the Contact by relating it with the class Person
-	public Address create(Long id,Address address) {
+	public Address createClientAddress(Long id,Address address) {
 		Person client = new Person();
 		client.setId(id);
 		client = clientService.findById(client);
@@ -44,12 +47,30 @@ public class AddressService implements GenericInterfaceService<Address> {
 		return addressRepository.save(address);
 	}
 
-	public void update(Long id,Address address) {
+	public void updateClientAddress(Long id,Address address) {
 		Person client = new Person();
 		client.setId(id);
 		client = clientService.findById(client);
 		findById(address);
 		address.setIdPerson(client);
+		addressRepository.save(address);
+	}
+	
+	public Address createUserAddress(Long id,Address address) {
+		Person user = new Person();
+		user.setId(id);
+		user = clientService.findById(user);
+		verifyAddress(address);
+		address.setIdPerson(user);
+		return addressRepository.save(address);
+	}
+
+	public void updateUserAddress(Long id,Address address) {
+		Person user = new Person();
+		user.setId(id);
+		user = clientService.findById(user);
+		findById(address);
+		address.setIdPerson(user);
 		addressRepository.save(address);
 	}
 
@@ -67,6 +88,7 @@ public class AddressService implements GenericInterfaceService<Address> {
 		}catch(RuntimeException e){
 			throw new AddressDoesNotExistException("O endereco informado não existe!");
 		}
+		if(checkAddress == null) throw new AddressDoesNotExistException("O endereco informado não existe!");
 		return checkAddress;
 	}
 	

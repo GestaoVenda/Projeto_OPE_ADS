@@ -54,7 +54,7 @@ public class ClientService implements GenericInterfaceService<Person>{
 		}
 		if(client.getAddresses() != null){
 			for(Address address: client.getAddresses()){
-				addressService.create(checkPerson.getId(), address);
+				addressService.createClientAddress(checkPerson.getId(), address);
 			}
 		}
 		if(client.getDocuments() != null){
@@ -66,7 +66,23 @@ public class ClientService implements GenericInterfaceService<Person>{
 	}
 	
 	public void update(Person client){
-		
+		findById(client);
+		personRepository.save(client);
+		if(client.getContacts() != null){
+			for(Contact contact: client.getContacts()){
+				contactService.update(client.getId(), contact);
+			}
+		}
+		if(client.getAddresses() != null){
+			for(Address address: client.getAddresses()){
+				addressService.updateClientAddress(client.getId(), address);
+			}
+		}
+		if(client.getDocuments() != null){
+			for(Document document: client.getDocuments()){
+				documentService.update(client.getId(), document);
+			}
+		}
 	}
 
 	@Override
@@ -105,7 +121,9 @@ public class ClientService implements GenericInterfaceService<Person>{
 				checkDocument = documentService.findByTypeAndValue(document.getIdTypeDocument(), document.getValue());
 			if(document.getIdTypeDocument().getName() == "cpf" && document.getValue() != null)
 				checkDocument = documentService.findByTypeAndValue(document.getIdTypeDocument(), document.getValue());
-			if(document.getIdTypeDocument().getName() == "insc" && document.getValue() != null)
+			if(document.getIdTypeDocument().getName() == "insc_estadual" && document.getValue() != null)
+				checkDocument = documentService.findByTypeAndValue(document.getIdTypeDocument(), document.getValue());
+			if(document.getIdTypeDocument().getName() == "insc_municipal" && document.getValue() != null)
 				checkDocument = documentService.findByTypeAndValue(document.getIdTypeDocument(), document.getValue());
 			if(checkDocument != null || checkPerson != null) throw new ClientAlreadyExistException("Cliente informado já existe!");		
 		}	

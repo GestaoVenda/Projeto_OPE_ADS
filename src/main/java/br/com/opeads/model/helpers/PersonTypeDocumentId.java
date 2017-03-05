@@ -2,6 +2,7 @@ package br.com.opeads.model.helpers;
 
 import java.io.Serializable;
 
+
 public class PersonTypeDocumentId implements Serializable{
 
 	/**

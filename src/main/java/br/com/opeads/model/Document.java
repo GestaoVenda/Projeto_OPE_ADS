@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -19,7 +20,7 @@ import br.com.opeads.model.helpers.PersonTypeDocumentId;
 @Component
 @Entity
 @Table(name = "document")
-@IdClass(PersonTypeDocumentId.class)
+@IdClass(value = PersonTypeDocumentId.class)
 public class Document implements Serializable{
 
 	/**
