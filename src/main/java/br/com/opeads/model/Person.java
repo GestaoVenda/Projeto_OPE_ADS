@@ -2,6 +2,7 @@ package br.com.opeads.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name = "person")
 public class Person implements Serializable{
@@ -38,6 +43,15 @@ public class Person implements Serializable{
 	
 	private boolean active;
 
+	@OneToMany(mappedBy = "idPerson")
+	private List<Document> documents;
+	
+	@OneToMany(mappedBy = "idPerson")
+	private List<Contact> contacts;
+	
+	@OneToMany(mappedBy = "idPerson")
+	private List<Address> addresses;
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,6 +90,30 @@ public class Person implements Serializable{
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+	
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	@Override

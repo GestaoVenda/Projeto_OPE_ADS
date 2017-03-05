@@ -9,8 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import br.com.opeads.model.helpers.PersonTypeDocumentId;
 
+@Component
 @Entity
 @Table(name = "document")
 @IdClass(PersonTypeDocumentId.class)
@@ -33,6 +39,7 @@ public class Document implements Serializable{
 	
 	private String value;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	public Person getIdPerson() {
 		return idPerson;
 	}

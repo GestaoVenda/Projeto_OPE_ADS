@@ -10,30 +10,30 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.opeads.error.model.Error;
-import br.com.opeads.exception.AddressAlreadyExistsException;
-import br.com.opeads.exception.AddressDoesNotExistsException;
+import br.com.opeads.exception.AddressAlreadyExistException;
+import br.com.opeads.exception.AddressDoesNotExistException;
 
 @ControllerAdvice
 public class AddressExceptionHandler {
 
-	@ExceptionHandler(AddressDoesNotExistsException.class)
-	public ResponseEntity<?> handlerEnderecoNaoExisteException(AddressDoesNotExistsException e,HttpServletRequest request){
+	@ExceptionHandler(AddressDoesNotExistException.class)
+	public ResponseEntity<?> handlerEnderecoNaoExisteException(AddressDoesNotExistException e,HttpServletRequest request){
 		Error erro = new Error();
 		erro.setStatus(204L);
 		erro.setTitle(e.getMessage());
 		erro.setDescription("Ocorreu um erro na requisição devido a não existência do dado informado");
 		erro.setMessage("A requisição não obteve o retorno esperado. Para mais informações entre em contato com os desenvolvedores");
-		erro.setError(new Date());
+		erro.setTimestamp(new Date());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 	
-	@ExceptionHandler(AddressAlreadyExistsException.class)
-	public ResponseEntity<?> handlerEnderecoJaExisteException(AddressAlreadyExistsException e, HttpServletRequest request){
+	@ExceptionHandler(AddressAlreadyExistException.class)
+	public ResponseEntity<?> handlerEnderecoJaExisteException(AddressAlreadyExistException e, HttpServletRequest request){
 		Error erro = new Error();
 		erro.setStatus(409L);
 		erro.setTitle(e.getMessage());
 		erro.setDescription("Ocorreu um erro na requisição devido a já existência do dado informado, causando duplicidade");
-		erro.setError(new Date());
+		erro.setTimestamp(new Date());
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
 	}
 }

@@ -10,30 +10,32 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.opeads.error.model.Error;
-import br.com.opeads.exception.PersonAlreadyExistsException;
-import br.com.opeads.exception.PersonDoesNotExistsException;
+import br.com.opeads.exception.ClientAlreadyExistException;
+import br.com.opeads.exception.ClientDoesNotExistException;
 
 @ControllerAdvice
 public class ClientExceptionHandler {
 
-	@ExceptionHandler(PersonDoesNotExistsException.class)
-	public ResponseEntity<?> handlerClienteNaoExisteException(PersonDoesNotExistsException e,HttpServletRequest request){
+	@ExceptionHandler(ClientDoesNotExistException.class)
+	public ResponseEntity<?> handlerClienteNaoExisteException(ClientDoesNotExistException e,HttpServletRequest request){
 		Error erro = new Error();
 		erro.setStatus(204L);
 		erro.setTitle(e.getMessage());
 		erro.setDescription("Ocorreu um erro na requisição devido a não existência do dado informado");
 		erro.setMessage("A requisição não obteve o retorno esperado. Para mais informações entre em contato com os desenvolvedores");
-		erro.setError(new Date());
+		erro.setTimestamp(new Date());
+		erro.setMessage(e.getLocalizedMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 	
-	@ExceptionHandler(PersonAlreadyExistsException.class)
-	public ResponseEntity<?> handlerClienteJaExisteException(PersonAlreadyExistsException e, HttpServletRequest request){
+	@ExceptionHandler(ClientAlreadyExistException.class)
+	public ResponseEntity<?> handlerClienteJaExisteException(ClientAlreadyExistException e, HttpServletRequest request){
 		Error erro = new Error();
 		erro.setStatus(409L);
 		erro.setTitle(e.getMessage());
-		erro.setDescription("Ocorreu um erro na requisição devido a já existência do dado informado, causando duplicidade");
-		erro.setError(new Date());
+		erro.setDescription("Ocorreu um erro na requisição devido a já existência do dado informado, podendo causar duplicidade de dados");
+		erro.setTimestamp(new Date());
+		erro.setMessage("A requisição não obteve o retorno esperado. Para mais informações entre em contato com os desenvolvedores");
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
 	}
 }

@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.opeads.model.helpers.MainMenuNameId;
+
 @Entity
 @Table(name = "sub_menu")
+@IdClass(MainMenuNameId.class)
 public class SubMenu implements Serializable{
 
 	/**
@@ -24,6 +28,8 @@ public class SubMenu implements Serializable{
 	
 	@Id
 	private String name;
+	
+	private String state;
 
 	public MainMenu getIdMainMenu() {
 		return idMainMenu;
@@ -33,6 +39,14 @@ public class SubMenu implements Serializable{
 		this.idMainMenu = idMainMenu;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -40,6 +54,8 @@ public class SubMenu implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

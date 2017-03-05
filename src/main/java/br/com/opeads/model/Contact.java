@@ -11,6 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+@Component
 @Entity
 @Table(name = "contact")
 public class Contact implements Serializable {
@@ -27,11 +33,14 @@ public class Contact implements Serializable {
 	
 	private String phone;
 	
+	private String name;
+	
 	@Column(name = "cellphone")
 	private String cellPhone;
 	
 	private String email;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne
 	@JoinColumn(name = "fk_id_person")
 	private Person idPerson;
@@ -50,6 +59,14 @@ public class Contact implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCellPhone() {

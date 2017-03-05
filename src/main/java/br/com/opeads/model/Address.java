@@ -11,6 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+@Component
 @Entity
 @Table(name = "address")
 public class Address implements Serializable{
@@ -46,6 +52,7 @@ public class Address implements Serializable{
 	@JoinColumn(name = "fk_id_type_address")
 	private TypeAddress idTypeAddress;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne
 	@JoinColumn(name = "fk_id_person")
 	private Person idPerson;

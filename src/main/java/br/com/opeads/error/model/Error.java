@@ -8,7 +8,7 @@ public class Error {
 	
 	private String description;
 	
-	private Date error;
+	private Date timestamp;
 	
 	private Long status;
 	
@@ -30,12 +30,12 @@ public class Error {
 		this.description = description;
 	}
 
-	public Date getError() {
-		return error;
+	public Date getTimestamp() {
+		return timestamp;
 	}
 
-	public void setError(Date error) {
-		this.error = error;
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	public Long getStatus() {

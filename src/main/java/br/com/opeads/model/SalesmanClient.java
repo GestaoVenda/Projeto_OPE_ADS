@@ -24,6 +24,7 @@ public class SalesmanClient implements Serializable{
 	@JoinColumn(name = "id_person")
 	private List<Person> idSalesmans;
 	
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "fk_id_person_client")
