@@ -67,6 +67,7 @@ public class ContactService implements GenericInterfaceService<Contact> {
 		}catch(RuntimeException e){
 			throw new ContactDoesNotExistException("O contato informado não existe!");
 		}
+		if(checkContact == null) throw new ContactDoesNotExistException("O contato informado não existe!");
 		return checkContact;
 	}
 	

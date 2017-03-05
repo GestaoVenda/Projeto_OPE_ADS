@@ -28,6 +28,9 @@ public class DocumentService implements GenericInterfaceService<Document>{
 	private ClientService clientService;
 	
 	@Autowired
+	private UserService userService;
+	
+	@Autowired
 	private Document checkDocument;
 	
 	@Override
@@ -36,7 +39,7 @@ public class DocumentService implements GenericInterfaceService<Document>{
 	}
 
 	//Here we save the document by relating it with the client
-	public Document create(Long id, Document document) {
+	public Document createClientDocument(Long id, Document document) {
 		Person client = new Person();
 		client.setId(id);
 		client = clientService.findById(client);
@@ -46,10 +49,29 @@ public class DocumentService implements GenericInterfaceService<Document>{
 		return checkDocument;
 	}
 
-	public void update(Long id,Document document) {
+	public void updateClientDocument(Long id,Document document) {
 		Person client = new Person();
 		client.setId(id);
 		client = clientService.findById(client);
+		findById(document);
+		document.setIdPerson(client);
+		documentRepository.save(document);	
+	}
+	
+	public Document createUserDocument(Long id, Document document) {
+		Person client = new Person();
+		client.setId(id);
+		client = userService.findById(client);
+		document.setIdPerson(client);
+		verifyIfTheDocumentAlreadyExist(document);
+		checkDocument = documentRepository.save(document);
+		return checkDocument;
+	}
+
+	public void updateUserDocument(Long id,Document document) {
+		Person client = new Person();
+		client.setId(id);
+		client = userService.findById(client);
 		findById(document);
 		document.setIdPerson(client);
 		documentRepository.save(document);	
@@ -69,6 +91,7 @@ public class DocumentService implements GenericInterfaceService<Document>{
 		}catch(RuntimeException e){
 			throw new DocumentDoesNotExistException("O documento informado não existe!");
 		}
+		if(checkDocument == null) throw new DocumentDoesNotExistException("O endereco informado não existe!");
 		return checkDocument;
 	}
 	

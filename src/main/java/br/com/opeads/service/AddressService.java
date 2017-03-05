@@ -59,7 +59,7 @@ public class AddressService implements GenericInterfaceService<Address> {
 	public Address createUserAddress(Long id,Address address) {
 		Person user = new Person();
 		user.setId(id);
-		user = clientService.findById(user);
+		user = userService.findById(user);
 		verifyAddress(address);
 		address.setIdPerson(user);
 		return addressRepository.save(address);
@@ -68,7 +68,7 @@ public class AddressService implements GenericInterfaceService<Address> {
 	public void updateUserAddress(Long id,Address address) {
 		Person user = new Person();
 		user.setId(id);
-		user = clientService.findById(user);
+		user = userService.findById(user);
 		findById(address);
 		address.setIdPerson(user);
 		addressRepository.save(address);
